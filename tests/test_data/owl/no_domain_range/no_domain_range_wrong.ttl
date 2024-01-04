@@ -1,0 +1,20 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Person a owl:Class ;
+  rdfs:domain ex:Thing ;
+  rdfs:range ex:Thing .
+
+ex:name a owl:DatatypeProperty ;
+  rdfs:domain ex:Person ;
+  rdfs:range xsd:string .
+
+ex:hasFriend a owl:ObjectProperty ;
+  rdfs:domain ex:Person ;
+  rdfs:range ex:Person .
+
+ex:note a owl:AnnotationProperty ;
+  rdfs:domain ex:Thing ;
+  rdfs:range xsd:string .

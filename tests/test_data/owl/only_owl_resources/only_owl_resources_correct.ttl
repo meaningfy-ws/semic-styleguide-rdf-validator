@@ -1,0 +1,10 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+ex:Person a owl:Class .
+
+ex:name a owl:DatatypeProperty .
+
+ex:hasFriend a owl:ObjectProperty .
+
+ex:note a owl:AnnotationProperty .
