@@ -1,0 +1,264 @@
+# baseURI: http://example.org/semic-shacl
+# imports: http://datashapes.org/dash
+
+@prefix : <http://example.org/semic-shacl#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:DatatypePropertyNoDomainRangeShape
+  rdf:type sh:NodeShape ;
+  sh:property _:b66543 ;
+  sh:property _:b66997 ;
+  sh:targetClass owl:DatatypeProperty ;
+.
+ex:ObjectPropertyNoDomainRangeShape
+  rdf:type sh:NodeShape ;
+  sh:property _:b19544 ;
+  sh:property _:b71204 ;
+  sh:targetClass owl:ObjectProperty ;
+.
+ex:Person
+  rdf:type owl:Class ;
+  rdfs:domain ex:Thing ;
+  rdfs:range ex:Thing ;
+.
+ex:hasFriend
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ex:Person ;
+  rdfs:range ex:Person ;
+.
+ex:name
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain ex:Person ;
+  rdfs:range xsd:string ;
+.
+ex:note
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain ex:Thing ;
+  rdfs:range xsd:string ;
+.
+ex:semic-shacl
+  rdf:type owl:Ontology ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:versionInfo "Compatible with TopBraid Composer 6.x" ;
+.
+:GraphValidationTestCase
+  rdf:type dash:GraphValidationTestCase ;
+  dash:expectedResult [
+      rdf:type sh:ValidationReport ;
+      sh:conforms "false"^^xsd:boolean ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode ex:hasFriend ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode ex:hasFriend ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode ex:name ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b66543 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode ex:name ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b66997 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:bottomDataProperty ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b66543 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:bottomDataProperty ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b66997 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:bottomObjectProperty ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:bottomObjectProperty ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:differentFrom ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:differentFrom ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:disjointWith ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:disjointWith ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:equivalentClass ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:equivalentClass ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:equivalentProperty ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:equivalentProperty ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:inverseOf ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:inverseOf ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:sameAs ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:sameAs ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:topDataProperty ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b66543 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:topDataProperty ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b66997 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:topObjectProperty ;
+          sh:resultPath rdfs:domain ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b19544 ;
+        ] ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode owl:topObjectProperty ;
+          sh:resultPath rdfs:range ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+          sh:sourceShape _:b71204 ;
+        ] ;
+    ] ;
+.
+_:b19544
+  sh:path rdfs:domain ;
+  sh:maxCount 0 ;
+.
+_:b66543
+  sh:path rdfs:domain ;
+  sh:maxCount 0 ;
+.
+_:b66997
+  sh:path rdfs:range ;
+  sh:maxCount 0 ;
+.
+_:b71204
+  sh:path rdfs:range ;
+  sh:maxCount 0 ;
+.
