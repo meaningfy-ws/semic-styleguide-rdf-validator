@@ -1,0 +1,20 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+ex:Person a owl:Class ;
+  rdfs:label "Person" .
+
+ex:name a owl:DatatypeProperty ;
+  skos:prefLabel "name" .
+
+ex:hasFriend a owl:ObjectProperty ;
+  rdfs:label "hasFriend", "hasFriend"@en ;
+  skos:prefLabel "hasFriend", "hasFriend"@en ;
+  skos:altLabel "hasFriend" , "hasFriendd" .
+
+ex:note a owl:AnnotationProperty ;
+  skos:prefLabel "note"@en , "nota"@es ;
+  rdfs:label "note"@en , "nota"@es ;
+  rdfs:comment "note" , "notee" .
