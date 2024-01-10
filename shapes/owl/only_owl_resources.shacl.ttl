@@ -9,5 +9,5 @@ ex:OnlyOWLResourcesShape
   sh:property [
     sh:path rdf:type ;
     sh:message "Violation of SEMIC rule SC-R2: Only OWL class and property declarations shall be used" ;
-    sh:in (owl:Class owl:DatatypeProperty owl:ObjectProperty owl:AnnotationProperty) ;
+    sh:in (owl:Ontology owl:Class owl:DatatypeProperty owl:ObjectProperty owl:AnnotationProperty) ;
   ] .
