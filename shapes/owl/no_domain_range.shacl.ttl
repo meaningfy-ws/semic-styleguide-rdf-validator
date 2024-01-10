@@ -3,18 +3,16 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-# TODO:
-# - `sh:message` doesn't appear to work
-
 ex:NoDomainRangeShape
   a sh:NodeShape ;
   sh:targetSubjectsOf rdf:type ;
-#  sh:message "Violation of rule SC-R2: RDFS domain and range statements are not allowed in OWL artefacts." ;
   sh:property [
     sh:path rdfs:domain ;
     sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule SC-R2: No expressions of property domain shall be used" ;
   ] ;
   sh:property [
     sh:path rdfs:range ;
     sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule SC-R2: No expressions of property range shall be used" ;
   ] .

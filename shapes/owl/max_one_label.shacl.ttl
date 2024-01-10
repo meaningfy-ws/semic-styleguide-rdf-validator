@@ -18,7 +18,7 @@ ex:MaxOneRDFLabelShape
     sh:qualifiedValueShape [
       sh:datatype xsd:string ;
     ] ;
-    sh:message "More than one `rdfs:label` exists without a language tag" ;
+    sh:message "Violation of standard practice: More than one `rdfs:label` exists without a language tag" ;
   ]
 .
 
@@ -35,6 +35,6 @@ ex:MaxOneSKOSLabelShape
     sh:qualifiedValueShape [
       sh:datatype xsd:string ;
     ] ;
-    sh:message "More than one `skos:prefLabel` exists without a language tag" ;
+    sh:message "Violation of standard practice: More than one `skos:prefLabel` exists without a language tag" ;
   ]
 .

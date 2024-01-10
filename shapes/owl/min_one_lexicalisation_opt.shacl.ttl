@@ -7,7 +7,7 @@
 ex:MinOneLexicalisationOptionalShape
   rdf:type sh:NodeShape ;
   sh:targetSubjectsOf rdf:type ;
-  sh:message "At least one lexicalisation label should exist" ;
+  sh:message "Non-observance of SEMIC rule SC-R3: At least one lexicalisation label should exist" ;
   sh:severity sh:Warning ;
   sh:or (
     [
