@@ -1,0 +1,23 @@
+PREFIX ex: <http://example.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+# A SHACL-SPARQL query test
+#
+# - ?this is the target ($this in the shape definition)
+# - ?path is the property to be constrained (here the one failing)
+# - ?value is the non-conformant object
+
+# The example here tests that any relationship that holds between the target
+# and another resource that is an IRI can only be one of {rdf:type,
+# rdfs:subClassOf} and projects any disallowed relationship as the path.
+
+SELECT ?this (?p AS ?path) ?value
+WHERE {
+  ?this ?p ?value .
+  FILTER(isIRI(?value))
+  FILTER(?p not in (rdf:type, rdfs:subClassOf))
+}
