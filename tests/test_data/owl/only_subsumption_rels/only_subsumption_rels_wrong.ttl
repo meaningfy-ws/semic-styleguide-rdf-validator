@@ -1,0 +1,23 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:InvalidClass a owl:Class .
+ex:UnaffectedClass a owl:Class .
+
+ex:InvalidClass ex:something ex:UnaffectedClass .
+ex:UnaffectedClass ex:something "foo" .
+
+# TODO: Have to split up because just one wrong makes negative test pass
+
+ex:InvalidObjProp a owl:ObjectProperty .
+ex:UnaffectedObjProp a owl:ObjectProperty .
+
+ex:InvalidObjProp ex:something ex:UnaffectedObjProp .
+ex:UnaffectedObjProp ex:something "foo" .
+
+ex:InvalidDataProp a owl:DatatypeProperty .
+ex:UnaffectedDataProp a owl:DatatypeProperty .
+
+ex:InvalidDataProp ex:something ex:UnaffectedDataProp .
+ex:UnaffectedDataProp ex:something "foo" .

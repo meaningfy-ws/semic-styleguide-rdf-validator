@@ -1,0 +1,39 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+#-- Class --#
+
+ex:ValidClass a owl:Class .
+ex:UnaffectedClass a owl:Class .
+
+ex:InvalidClass ex:something ex:UnaffectedClass .
+ex:ValidClass rdfs:subClassOf ex:UnaffectedClass .
+ex:UnaffectedClass ex:something "bar" .
+
+# ex:IgnoredClass a owl:Class . # only this will make invalid
+ex:IgnoredClass ex:something ex:foo .
+
+#-- Object Property --#
+
+ex:ValidObjProp a owl:ObjectProperty .
+ex:UnaffectedObjProp a owl:ObjectProperty .
+
+ex:InvalidObjProp ex:something ex:UnaffectedObjProp .
+ex:ValidObjProp rdfs:subPropertyOf ex:UnaffectedObjProp .
+ex:UnaffectedObjProp ex:something "bar" .
+
+# ex:IgnoredObjProp a owl:ObjectProperty . # only this will make invalid
+ex:IgnoredObjProp ex:something ex:foo .
+
+#-- Datatype Property --#
+
+ex:ValidDataProp a owl:ObjectProperty .
+ex:UnaffectedDataProp a owl:ObjectProperty .
+
+ex:InvalidDataProp ex:something ex:UnaffectedDataProp .
+ex:ValidDataProp rdfs:subPropertyOf ex:UnaffectedDataProp .
+ex:UnaffectedDataProp ex:something "bar" .
+
+# ex:IgnoredDataProp a owl:DatatypeProperty . # only this will make invalid
+ex:IgnoredDataProp ex:something ex:foo .
