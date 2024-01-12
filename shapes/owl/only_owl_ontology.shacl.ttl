@@ -1,0 +1,36 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# inpsired by https://stackoverflow.com/questions/55829024/can-shacl-express-constraints-about-the-entire-data-scope
+
+# this is good to have, even if not mandated in any convention or standard
+ex:TypeDeclarationShape
+  a sh:NodeShape ;
+  sh:targetNode ex:DummyNode ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of standard practice: Missing explicit type declaration" ;
+    sh:select """
+      SELECT (?p AS ?path) ?value
+      WHERE {
+        ?s ?p ?value .
+        FILTER NOT EXISTS { ?s a ?o }
+      }
+      """ ;
+  ]
+.
+
+ex:OnlyOWLOntologyShape
+  a sh:NodeShape ;
+  sh:targetNode owl:Ontology ;
+  sh:property [
+    sh:path [ sh:inversePath rdf:type ] ;
+    sh:minCount 1 ;
+    sh:message "Violation of SEMIC rule SC-R1: Missing OWL ontology declaration" ;
+  ]
+.
