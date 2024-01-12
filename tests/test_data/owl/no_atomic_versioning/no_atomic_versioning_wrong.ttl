@@ -1,0 +1,17 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Ontology a owl:Ontology .
+
+ex:Person a owl:Class ;
+  owl:versionInfo "1.1.1" ;
+  owl:versionIRI ex:Ontology-1.1.1 .
+
+ex:name a owl:DatatypeProperty ;
+  owl:versionInfo "1.1.1" ;
+  owl:versionIRI ex:Ontology-1.1.1 .
+
+ex:hasFriend a owl:ObjectProperty ;
+  owl:versionInfo "1.1.1" ;
+  owl:versionIRI ex:Ontology-1.1.1 .
