@@ -22,7 +22,7 @@ ex:OnlyClassSubsumptionShape
       SELECT $this (?p AS ?path) ?value
       WHERE {
         $this ?p ?value .
-        FILTER(?p not in (rdf:type, rdfs:subClassOf))
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subClassOf))
         FILTER(isIRI(?value))
       }
       """ ;
@@ -44,7 +44,7 @@ ex:OnlyObjPropSubsumptionShape
       SELECT $this (?p AS ?path) ?value
       WHERE {
         $this ?p ?value .
-        FILTER(?p not in (rdf:type, rdfs:subPropertyOf))
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subPropertyOf))
         FILTER(isIRI(?value))
       }
       """ ;
@@ -63,7 +63,7 @@ ex:OnlyDataPropSubsumptionShape
       SELECT $this (?p AS ?path) ?value
       WHERE {
         $this ?p ?value .
-        FILTER(?p not in (rdf:type, rdfs:subPropertyOf))
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subPropertyOf))
         FILTER(isIRI(?value))
       }
       """ ;
