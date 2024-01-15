@@ -3,14 +3,13 @@ from rdflib import Graph
 
 DATA_FILE = "resources/examples/example-data.ttl"
 SHACL_FILE = "resources/examples/example-shape.shacl.ttl"
-INFERENCE = "rdfs"  # comment out if undesired
 
 
 def main(data_file, shacl_file):
     input_data = Graph().parse(data_file)
     shacl_data = Graph().parse(shacl_file)
     # conforms, report_graph, text = validate(input_data, shacl_graph=shacl_data)
-    _, _, text = validate(input_data, shacl_graph=shacl_data, inference=INFERENCE)
+    _, _, text = validate(input_data, shacl_graph=shacl_data)
 
     print(text)
 
