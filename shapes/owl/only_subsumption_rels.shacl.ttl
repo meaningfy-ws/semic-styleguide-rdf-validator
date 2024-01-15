@@ -8,9 +8,13 @@
 
 # TODO: Should we target any IRI? Not easily apparent if that would work.
 
+# PERF total ~66% reduction in time if all here deactivated (ref: ePO-core)
+
+# PERF ~13% reduction in time if deactivated (ref: ePO-core)
 ex:OnlyClassSubsumptionShape
   a sh:NodeShape ;
   sh:targetClass owl:Class ;
+  sh:deactivated false ;
   sh:sparql [
     a sh:SPARQLConstraint ;
     sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL class relations shall be used" ;
@@ -28,9 +32,11 @@ ex:OnlyClassSubsumptionShape
 # NOTE: for some reason rdf:Property (inference) or advanced SPARQL target (to
 # capture both types of properties) does not work
 
+# PERF ~33% reduction in time if deactivated (ref: ePO-core)
 ex:OnlyObjPropSubsumptionShape
   a sh:NodeShape ;
   sh:targetClass owl:ObjectProperty ;
+  sh:deactivated false ;
   sh:sparql [
     a sh:SPARQLConstraint ;
     sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used" ;
@@ -45,9 +51,11 @@ ex:OnlyObjPropSubsumptionShape
   ]
 .
 
+# PERF ~20% reduction in time if deactivated (ref: ePO-core)
 ex:OnlyDataPropSubsumptionShape
   a sh:NodeShape ;
   sh:targetClass owl:DatatypeProperty ;
+  sh:deactivated false ;
   sh:sparql [
     a sh:SPARQLConstraint ;
     sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used" ;

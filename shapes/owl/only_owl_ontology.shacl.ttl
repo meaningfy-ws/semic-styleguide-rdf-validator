@@ -9,9 +9,11 @@
 # inpsired by https://stackoverflow.com/questions/55829024/can-shacl-express-constraints-about-the-entire-data-scope
 
 # this is good to have, even if not mandated in any convention or standard
+# PERF ~6% reduction in time if deactivated (ref: ePO-core)
 ex:TypeDeclarationShape
   a sh:NodeShape ;
   sh:targetNode ex:DummyNode ;
+  sh:deactivated false ;
   sh:sparql [
     a sh:SPARQLConstraint ;
     sh:message "Violation of standard practice: Missing explicit type declaration" ;
