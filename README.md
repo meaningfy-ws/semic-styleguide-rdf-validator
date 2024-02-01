@@ -1,9 +1,43 @@
-# SEMIC Conformance Test Suite for OWL and ShaCL
+# ITB SEMIC Conformance Module and Test Suite for OWL and ShaCL
+
+This project comprises a Python test suite and Java-compliant resources, for
+validating [OWL](https://www.w3.org/TR/owl2-overview/) vocabularies and
+[SHACL](https://www.w3.org/TR/shacl/) shapes, according to the [SEMIC
+conventions](https://semiceu.github.io/style-guide/1.0.0/guidelines-and-conventions.html)
+for [semantic data
+interoperability](https://joinup.ec.europa.eu/collection/semic-support-centre/semic-style-guide-semantic-engineers),
+as part of the [interoperability test bed
+(ITB)](https://joinup.ec.europa.eu/collection/interoperability-test-bed-repository/solution/interoperability-test-bed).
+
+The use case is geared towards validating an OWL ontology (rather than its
+instance data) like
+[ePO](https://github.com/OP-TED/ePO/tree/master/implementation/ePO_core/owl_ontology)
+and/or a [SHACL shapes
+file](https://github.com/OP-TED/ePO/tree/master/implementation/ePO_core/shacl_shapes)
+(which itself typically validates instance data) to ensure comformance to
+applicable SEMIC rules.
+
+## Structure
+
+Aside from the `examples` folder, which is provided for user convenience, only
+the `resources` folder is
+[specific](https://www.itb.ec.europa.eu/docs/guides/latest/validatingRDF/) to
+the [ITB validator](https://github.com/ISAITB/shacl-validator).
+
+The single SEMIC shapes file `resources/shapes/semic-shapes.ttl` is
+automatically generated from multiple modular SHACL files (with the extension
+`.shacl.ttl`) under the toplevel `shapes` folder, which are used by the Python
+unit test files in `test`.
+
+Support for aggregating data, running a validation command, and testing a local
+ITB validator service instance via [Docker](https://www.docker.com/) are also
+provided (see `Makefile`, `validation_runner.py` and `docker-compose.yml`
+respectively).
 
 ## Environment
 
-This is a Python 3.8+ project. You may want to create a local virtual
-environment to set up and run anything in it:
+The unit testing component is a Python 3.8+ project. You may want to create a
+local virtual environment to set up and run anything in it:
 
 ```bash
 python -m venv .venv
@@ -50,7 +84,8 @@ individual test shapes, a convenience Make target is provided:
 make generate_aggregate_shapes
 ```
 
-This generates the ShACL shapes file in `output/semic-shacl.ttl`.
+This generates the ShACL shapes file in `output/semic-shacl.ttl` (a version of
+which is committed in `resources/shapes`).
 
 Alternatively, if you do not have `make`, inspect the Makefile and run the
 relevant commands yourself.
