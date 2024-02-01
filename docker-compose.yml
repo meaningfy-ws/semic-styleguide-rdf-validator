@@ -1,0 +1,14 @@
+version: "3.8"
+#http://localhost:8089/shacl/shacl/upload
+services:
+
+  itb-validator:
+    container_name: itb-validator
+    image: isaitb/shacl-validator:latest
+    ports:
+      - "8089:8080"
+    volumes:
+      - ./resources:/validator/shacl
+    environment:
+      - validator.resourceRoot=/validator
+

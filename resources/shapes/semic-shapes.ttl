@@ -1,0 +1,228 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:NoDomainRangeShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path rdfs:domain ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule SC-R2: No expressions of property domain shall be used" ;
+  ] ;
+  sh:property [
+    sh:path rdfs:range ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule SC-R2: No expressions of property range shall be used" ;
+  ] .
+
+# TODO: Should we target any IRI? Not easily apparent if that would work.
+
+# PERF total ~66% reduction in time if all here deactivated (ref: ePO-core)
+
+# PERF ~13% reduction in time if deactivated (ref: ePO-core)
+ex:OnlyClassSubsumptionShape
+  a sh:NodeShape ;
+  sh:targetClass owl:Class ;
+  sh:deactivated false ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL class relations shall be used" ;
+    sh:select """
+      SELECT $this (?p AS ?path) ?value
+      WHERE {
+        $this ?p ?value .
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subClassOf))
+        FILTER(isIRI(?value))
+      }
+      """ ;
+  ]
+.
+
+# NOTE: for some reason rdf:Property (inference) or advanced SPARQL target (to
+# capture both types of properties) does not work
+
+# PERF ~33% reduction in time if deactivated (ref: ePO-core)
+ex:OnlyObjPropSubsumptionShape
+  a sh:NodeShape ;
+  sh:targetClass owl:ObjectProperty ;
+  sh:deactivated false ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used" ;
+    sh:select """
+      SELECT $this (?p AS ?path) ?value
+      WHERE {
+        $this ?p ?value .
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subPropertyOf))
+        FILTER(isIRI(?value))
+      }
+      """ ;
+  ]
+.
+
+# PERF ~20% reduction in time if deactivated (ref: ePO-core)
+ex:OnlyDataPropSubsumptionShape
+  a sh:NodeShape ;
+  sh:targetClass owl:DatatypeProperty ;
+  sh:deactivated false ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used" ;
+    sh:select """
+      SELECT $this (?p AS ?path) ?value
+      WHERE {
+        $this ?p ?value .
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subPropertyOf))
+        FILTER(isIRI(?value))
+      }
+      """ ;
+  ]
+.
+
+ex:OnlyOWLResourcesShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:message "Violation of SEMIC rule SC-R2: Only OWL class and property declarations shall be used" ;
+    sh:in (owl:Ontology owl:Class owl:DatatypeProperty owl:ObjectProperty owl:AnnotationProperty rdfs:Datatype) ;
+  ] .
+
+ex:MinOneLexicalisationOptionalShape
+  rdf:type sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:message "Non-observance of SEMIC rule SC-R3: At least one lexicalisation label should exist" ;
+  sh:severity sh:Warning ;
+  sh:or (
+    [
+      sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1
+      ]
+    ]
+    [
+      sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1
+      ]
+    ]
+  ) .
+
+ex:MaxOneRDFLabelShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:uniqueLang true ;
+  ] ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:qualifiedMaxCount 1 ;
+    sh:qualifiedValueShape [
+      sh:datatype xsd:string ;
+    ] ;
+    sh:message "Violation of standard practice: More than one `rdfs:label` exists without a language tag" ;
+  ]
+.
+
+ex:MaxOneSKOSLabelShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path skos:prefLabel ;
+    sh:uniqueLang true ;
+  ] ;
+  sh:property [
+    sh:path skos:prefLabel ;
+    sh:qualifiedMaxCount 1 ;
+    sh:qualifiedValueShape [
+      sh:datatype xsd:string ;
+    ] ;
+    sh:message "Violation of standard practice: More than one `skos:prefLabel` exists without a language tag" ;
+  ]
+.
+
+# TODO:
+# - We need a better way to do this but unfortunately using the inverseOf
+#   technique with targetSubjectsOf and/or sh:class does not appear to work
+
+ex:NoAtomicVersionClassShape
+  a sh:NodeShape ;
+  sh:targetClass owl:Class ;
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ] ;
+  sh:property [
+    sh:path owl:versionIRI ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ]
+.
+
+ex:NoAtomicVersionObjPropShape
+  a sh:NodeShape ;
+  sh:targetClass owl:ObjectProperty ;
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ] ;
+    sh:property [
+    sh:path owl:versionIRI ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ]
+.
+
+ex:NoAtomicVersionDataPropShape
+  a sh:NodeShape ;
+  sh:targetClass owl:DatatypeProperty ;
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ] ;
+    sh:property [
+    sh:path owl:versionIRI ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ]
+.
+
+# inpsired by https://stackoverflow.com/questions/55829024/can-shacl-express-constraints-about-the-entire-data-scope
+
+# this is good to have, even if not mandated in any convention or standard
+# PERF ~6% reduction in time if deactivated (ref: ePO-core)
+ex:TypeDeclarationShape
+  a sh:NodeShape ;
+  sh:targetNode ex:DummyNode ;
+  sh:deactivated false ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of standard practice: Missing explicit type declaration" ;
+    sh:select """
+      SELECT (?p AS ?path) ?value
+      WHERE {
+        ?s ?p ?value .
+        FILTER NOT EXISTS { ?s a ?o }
+      }
+      """ ;
+  ]
+.
+
+ex:OnlyOWLOntologyShape
+  a sh:NodeShape ;
+  sh:targetNode owl:Ontology ;
+  sh:property [
+    sh:path [ sh:inversePath rdf:type ] ;
+    sh:minCount 1 ;
+    sh:message "Violation of SEMIC rule SC-R1: Missing OWL ontology declaration" ;
+  ]
+.
