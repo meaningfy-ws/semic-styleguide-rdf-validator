@@ -9,10 +9,12 @@ ex:NoDomainRangeShape
   sh:property [
     sh:path rdfs:domain ;
     sh:maxCount 0 ;
-    sh:message "Violation of SEMIC rule SC-R2: No expressions of property domain shall be used" ;
+    sh:message "Non-observance of SEMIC rule SC-R2: No expressions of property domain shall be used" ;
+    sh:severity sh:Warning ;
   ] ;
   sh:property [
     sh:path rdfs:range ;
     sh:maxCount 0 ;
-    sh:message "Violation of SEMIC rule SC-R2: No expressions of property range shall be used" ;
+    sh:message "Non-observance of SEMIC rule SC-R2: No expressions of property range shall be used" ;
+    sh:severity sh:Warning ;
   ] .
