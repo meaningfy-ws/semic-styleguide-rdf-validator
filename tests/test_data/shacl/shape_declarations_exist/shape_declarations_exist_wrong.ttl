@@ -1,0 +1,6 @@
+@prefix ex: <http://example.org/> .
+@prefix exsh: <http://example.org/shapes/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+ex:Person a owl:Class .
