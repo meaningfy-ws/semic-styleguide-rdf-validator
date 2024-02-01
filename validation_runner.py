@@ -1,8 +1,8 @@
 from pyshacl import validate
 from rdflib import Graph
 
-DATA_FILE = "resources/examples/example-data.ttl"
-SHACL_FILE = "resources/examples/example-shape.shacl.ttl"
+DATA_FILE = "examples/example-data.ttl"
+SHACL_FILE = "examples/example-shape.shacl.ttl"
 
 
 def main(data_file, shacl_file):
