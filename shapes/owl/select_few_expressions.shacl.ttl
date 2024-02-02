@@ -1,0 +1,97 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Uncomment the individual property restrictions to imply "minimum required"
+
+ex:SelectFewExpressionsShape
+  rdf:type sh:NodeShape ;
+  sh:closed true ;
+  sh:ignoredProperties (rdf:type rdfs:subClassOf rdfs:subPropertyOf) ;
+  sh:severity sh:Warning ;
+  sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall be limited to a select few expressions" ;
+  sh:targetSubjectsOf rdf:type ;
+
+  # Concept labels
+  sh:property [
+    sh:path rdfs:label ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept labels (rdfs:label) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:prefLabel ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept labels (skos:prefLabel) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:altLabel ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept labels (skos:altLabel) are recommended." ;
+  ] ;
+
+  # Concept definitions
+  sh:property [
+    sh:path rdfs:comment ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept definitions (rdfs:comment) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:definition ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept definitions (skos:definition) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:scopeNote ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept definitions (skos:scopeNote) are recommended." ;
+  ] ;
+
+  # Notes and comments
+  sh:property [
+    sh:path rdfs:comment ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (rdfs:comment) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:editorialNote ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (skos:editorialNote) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:changeNote ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (skos:changeNote) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:historyNote ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (skos:historyNote) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:example ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (skos:example) are recommended." ;
+  ] .
