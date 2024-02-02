@@ -6,12 +6,21 @@
 
 ex:SeverityDeclarationExistsShape
   a sh:NodeShape ;
-  sh:targetClass sh:PropertyShape ;
-  sh:property [
-    sh:path sh:severity ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    sh:message "Non-observation of SEMIC rule DSC-R5: Data shapes should be assigned a level of severity" ;
-    sh:severity sh:Warning ;
-  ] .
-  
+  sh:targetClass sh:NodeShape ;
+  sh:severity sh:Warning ;
+  sh:message "Non-observation of SEMIC rule DSC-R5: Data shapes should be assigned a level of severity" ;
+  sh:xone (
+    [
+      sh:property [
+        sh:path sh:severity ;
+        sh:minCount 1 ;
+      ]
+    ]
+    [
+      sh:property [
+        sh:path (sh:property sh:severity) ;
+        sh:minCount 1 ;
+        ]
+    ]
+  )
+.

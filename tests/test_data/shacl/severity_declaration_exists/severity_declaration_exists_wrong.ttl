@@ -3,4 +3,11 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 
-exsh:Person a sh:PropertyShape .
+exsh:InvalidNodeShapeWOProperty a sh:NodeShape .
+
+exsh:InvalidNodeShapeWPropertyNamed a sh:NodeShape .
+exsh:InvalidNodeShapeWPropertyNamed sh:property exsh:InvalidPropertyShape .
+exsh:InvalidPropertyShape a sh:PropertyShape .
+
+exsh:InvalidNodeShapeWPropertyBNode a sh:NodeShape .
+exsh:InvalidNodeShapeWPropertyBNode sh:property [ sh:message "I got no severity" ] .
