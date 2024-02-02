@@ -1,8 +1,9 @@
-# ITB SEMIC Conformance Module and Test Suite for OWL and ShaCL
+# SEMIC Style Guide RDF Validator
 
-This project comprises a Python test suite and Java-compliant resources, for
-validating [OWL](https://www.w3.org/TR/owl2-overview/) vocabularies and
-[SHACL](https://www.w3.org/TR/shacl/) shapes, according to the [SEMIC
+This project comprises a Python test suite and configuration resources for a
+Java service, for validating [OWL](https://www.w3.org/TR/owl2-overview/)
+vocabularies and [SHACL](https://www.w3.org/TR/shacl/) shapes, according to the
+[SEMIC
 conventions](https://semiceu.github.io/style-guide/1.0.0/guidelines-and-conventions.html)
 for [semantic data
 interoperability](https://joinup.ec.europa.eu/collection/semic-support-centre/semic-style-guide-semantic-engineers),
@@ -12,29 +13,47 @@ as part of the [interoperability test bed
 The use case is geared towards validating an OWL ontology (rather than its
 instance data) like
 [ePO](https://github.com/OP-TED/ePO/tree/master/implementation/ePO_core/owl_ontology)
-and/or a [SHACL shapes
+and/or a [SHACL Shapes
 file](https://github.com/OP-TED/ePO/tree/master/implementation/ePO_core/shacl_shapes)
 (which itself typically validates instance data) to ensure comformance to
 applicable SEMIC rules.
 
-## Structure
+## ITB SEMIC SHACL Validator
 
-Aside from the `examples` folder, which is provided for user convenience, only
-the `resources` folder is
+This service allows you to assess the conformance of an **OWL model**
+(ontology) or a **SHaCL Shapes** file with the [SEMIC Style
+Guide](https://semiceu.github.io/style-guide/1.0.0/gc-conceptual-model-conventions.html).
+For each guideline in the style guide, a set of rules have been implemented,
+which assess whether an OWL or SHACL convention is respected. These rules
+specify constraints on the structure, relationships, and properties within the
+models. The set of rules employed during validation is documented
+[here](https://docs.google.com/spreadsheets/d/12ZiwN6WXUNoujSWdnAbDd4asaT0IlQvlxkfm5VnItko/edit?usp=sharing).
+
+The content to validate can be provided as a **file** or a **URI reference**.
+Documentation on using the Interoperability Test Bed (ITB) is available
+[here](https://www.itb.ec.europa.eu/docs/guides/latest/validatingRDF/index.html#step-6-use-the-validator).
+
+### Useful Links
+* [REST API](https://www.itb.ec.europa.eu/vitb/swagger-ui/index.html)
+
+## SEMIC Conformance Test Suite for OWL and ShaCL
+
+Aside from the `examples/` folder, which is provided for user convenience, only
+the `resources/` folder is
 [specific](https://www.itb.ec.europa.eu/docs/guides/latest/validatingRDF/) to
 the [ITB validator](https://github.com/ISAITB/shacl-validator).
 
-The single SEMIC shapes file `resources/shapes/semic-shapes.ttl` is
+The single SEMIC shapes file `resources/shapes/semic-shapes.ttl` for ITB is
 automatically generated from multiple modular SHACL files (with the extension
-`.shacl.ttl`) under the toplevel `shapes` folder, which are used by the Python
-unit test files in `test`.
+`.shacl.ttl`) under the toplevel `shapes/` folder, which are used by the Python
+unit test files in `test/`.
 
 Support for aggregating data, running a validation command, and testing a local
 ITB validator service instance via [Docker](https://www.docker.com/) are also
 provided (see `Makefile`, `validation_runner.py` and `docker-compose.yml`
 respectively).
 
-## Environment
+### Environment
 
 The unit testing component is a Python 3.8+ project. You may want to create a
 local virtual environment to set up and run anything in it:
@@ -53,7 +72,7 @@ You may also use any other means to run Python programs, such as a
 system-installed interpreter, the `pyenv` tool, or the `conda` tool (via a
 distribution like Anaconda).
 
-## Installation
+### Installation
 
 Install the prerequisite software/library dependencies via the Python
 package manager Pip:
@@ -69,7 +88,7 @@ Alternatively, a convenience Makefile is provided through which you can
 simply run `make` (which defaults to running `make install`), if you have
 the tool.
 
-## Usage
+### Usage
 
 Run the test suite from the toplevel/root of the project folder:
 
