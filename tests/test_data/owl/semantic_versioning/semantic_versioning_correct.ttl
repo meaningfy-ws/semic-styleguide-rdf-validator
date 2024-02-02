@@ -1,0 +1,20 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+ex:ValidVersionedOntologyStable
+  a owl:Ontology ;
+  owl:versionInfo "1.2.3" .
+
+ex:ValidVersionedOntologyRC
+  a owl:Ontology ;
+  owl:versionInfo "1.2.3-rc.1" .
+
+ex:ValidVersionedOntologyRCAlt1
+  a owl:Ontology ;
+  owl:versionInfo "1.2.3-rc1" .
+
+ex:InvalidVersionedOntologyRCAlt2
+  a owl:Ontology ;
+  owl:versionInfo "1.2.3-rc-1" .

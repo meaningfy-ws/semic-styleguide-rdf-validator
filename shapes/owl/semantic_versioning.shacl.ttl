@@ -1,0 +1,22 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# second regex from https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+# handles x.y.z-rc1 but not z.y.z-rc.1 (both allowed by SemVer but maybe not in practice e.g. ePO)
+
+ex:SemanticVersioningShape
+  a sh:NodeShape ;
+  sh:targetClass owl:Ontology ;
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$" ;
+    sh:message "Violation of SEMIC rule PC-R3: The ontology shall be versioned following the SemVer specification" ;
+  ] .

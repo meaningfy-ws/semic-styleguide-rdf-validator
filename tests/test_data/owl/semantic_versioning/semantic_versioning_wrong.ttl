@@ -1,0 +1,32 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+ex:InvalidVersionedOntology
+  a owl:Ontology .
+
+ex:InvalidVersionedOntologyCommon
+  a owl:Ontology ;
+  owl:versionInfo "1.2" .
+
+ex:InvalidVersionedOntologyLazy
+  a owl:Ontology ;
+  owl:versionInfo "1" .
+
+ex:InvalidVersionedOntologyIdiotic
+  a owl:Ontology ;
+  owl:versionInfo "1.2.3.1" .
+
+ex:InvalidVersionedOntologyWords
+  a owl:Ontology ;
+  owl:versionInfo "alpha" .
+
+ex:InvalidVersionedOntologyRC
+  a owl:Ontology ;
+  owl:versionInfo "1.2.3-rc_1" .
+
+# this triggers two violations one for data type
+ex:InvalidVersionedOntologyNumbers
+  a owl:Ontology ;
+  owl:versionInfo 1.2 .
