@@ -48,6 +48,7 @@ def test_shacl_validation_wrong(shacl_data, wrong_data):
 
     print(report_text)
 
+    # TODO: propagate this technique throughout the tests (alternative to splitting data)
     result_list = json.loads(report_graph.serialize(format="json-ld"))
     results_count = len(result_list[0]["http://www.w3.org/ns/shacl#result"]) if not conforms else 0
 

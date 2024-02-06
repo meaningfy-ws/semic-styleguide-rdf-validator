@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from pyshacl import validate
 from rdflib import Graph
@@ -41,11 +43,20 @@ def test_shacl_validation_correct(shacl_data, correct_data):
 
 def test_shacl_validation_wrong(shacl_data, wrong_data):
     # Validate incorrect RDF data against SHACL shapes
-    conforms, _, _ = validate(wrong_data, shacl_graph=shacl_data, inference="rdfs")
+    conforms, report_graph, report_text = validate(wrong_data, shacl_graph=shacl_data)
+
+    print(report_text)
+
+    result_list = json.loads(report_graph.serialize(format="json-ld"))
+    results_count = (
+        len(result_list[0]["http://www.w3.org/ns/shacl#result"]) if not conforms else 0
+    )
 
     # Assert that the data does not conform to the shapes
     assert not conforms, "SHACL validation succeeded, but it should have failed"
 
+    # assert number of report results
+    assert results_count == 10
 
 if __name__ == "__main__":
     pytest.main()

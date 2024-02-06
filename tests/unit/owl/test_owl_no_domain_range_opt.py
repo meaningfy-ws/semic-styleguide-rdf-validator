@@ -5,33 +5,31 @@ from rdflib import Graph
 from tests import SHAPES_FOLDER
 from tests.unit.owl import TEST_DATA_FOLDER
 
-TEST_DATA_FOLDER = TEST_DATA_FOLDER / "no_domain_range"
+TEST_DATA_FOLDER = TEST_DATA_FOLDER / "no_domain_range_opt"
 SHAPES_FOLDER = SHAPES_FOLDER / "owl"
 
 
 @pytest.fixture
 def shacl_data():
     # Load your SHACL shapes
-    return Graph().parse(SHAPES_FOLDER / "no_domain_range.shacl.ttl", format="ttl")
+    return Graph().parse(SHAPES_FOLDER / "no_domain_range_opt.shacl.ttl", format="ttl")
 
 
 @pytest.fixture
 def correct_data():
     # Load correct RDF data
-    return Graph().parse(TEST_DATA_FOLDER / "no_domain_range_correct.ttl", format="ttl")
+    return Graph().parse(TEST_DATA_FOLDER / "no_domain_range_opt_correct.ttl", format="ttl")
 
 
 @pytest.fixture
 def wrong_data():
     # Load incorrect RDF data
-    return Graph().parse(TEST_DATA_FOLDER / "no_domain_range_wrong.ttl", format="ttl")
+    return Graph().parse(TEST_DATA_FOLDER / "no_domain_range_opt_wrong.ttl", format="ttl")
 
 
 def test_shacl_validation_correct(shacl_data, correct_data):
     # Validate correct RDF data against SHACL shapes
-    conforms, report_graph, report_text = validate(
-        correct_data, shacl_graph=shacl_data, inference="rdfs"
-    )
+    conforms, report_graph, _ = validate(correct_data, shacl_graph=shacl_data)
 
     # Assert that the data conforms to the shapes
     assert conforms, f"SHACL validation failed:\n{report_graph.serialize()}"
@@ -39,7 +37,7 @@ def test_shacl_validation_correct(shacl_data, correct_data):
 
 def test_shacl_validation_wrong(shacl_data, wrong_data):
     # Validate incorrect RDF data against SHACL shapes
-    conforms, _, _ = validate(wrong_data, shacl_graph=shacl_data, inference="rdfs")
+    conforms, _, _ = validate(wrong_data, shacl_graph=shacl_data)
 
     # Assert that the data does not conform to the shapes
     assert not conforms, "SHACL validation succeeded, but it should have failed"

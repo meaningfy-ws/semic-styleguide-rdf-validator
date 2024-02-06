@@ -29,6 +29,10 @@ generate_aggregate_data:
 	@ find tests/test_data -type f -iname "*wrong.ttl" -exec grep '^@prefix' {} \; | awk '!x[$$0]++' > output/$(DATA_FILE_WRONG)
 	@ find tests/test_data -type f -iname "*wrong.ttl" -exec grep -v '^@prefix' {} \; >> output/$(DATA_FILE_WRONG)
 
+list_rules_covered:
+	@ echo "$(BUILD_PRINT)List of rules covered by current shapes:"
+	@ grep -R "of SEMIC rule" shapes | sed -e 's/.*of SEMIC rule //' -e 's/:.*//' | sort -u
+
 clean:
 	@ echo "$(BUILD_PRINT)Cleaning up output folder"
 	@ rm -v output/$(SHAPES_FILE)
