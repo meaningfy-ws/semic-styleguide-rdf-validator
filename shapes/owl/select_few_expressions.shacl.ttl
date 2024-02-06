@@ -11,7 +11,7 @@
 ex:SelectFewExpressionsShape
   rdf:type sh:NodeShape ;
   sh:closed true ;
-  sh:ignoredProperties (rdf:type rdfs:subClassOf rdfs:subPropertyOf) ;
+  sh:ignoredProperties (rdf:type rdfs:subClassOf rdfs:subPropertyOf rdfs:isDefinedBy owl:imports) ;
   sh:severity sh:Warning ;
   sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall be limited to a select few expressions" ;
   sh:targetSubjectsOf rdf:type ;
