@@ -1,6 +1,7 @@
 @prefix ex: <http://example.org/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 
 ex:Person a rdfs:Class .
 
@@ -9,3 +10,21 @@ ex:hasName a rdf:Property .
 ex:hasFriend a rdf:Property .
 
 ex:note a rdf:Property .
+
+# FunctionalProperty Example
+ex:hasOwner a owl:ObjectProperty , owl:FunctionalProperty .
+
+# TransitiveProperty Example
+ex:hasSibling a owl:ObjectProperty , owl:TransitiveProperty .
+
+# SymmetricProperty Example
+ex:hasSibling a owl:ObjectProperty , owl:SymmetricProperty .
+
+# AsymmetricProperty Example
+ex:hasOwner a owl:ObjectProperty , owl:AsymmetricProperty .
+
+# ReflexiveProperty Example
+ex:hasSibling a owl:ObjectProperty , owl:ReflexiveProperty .
+
+# IrreflexiveProperty Example
+ex:hasOwner a owl:ObjectProperty , owl:IrreflexiveProperty .
