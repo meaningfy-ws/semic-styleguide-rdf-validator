@@ -18,7 +18,7 @@ ex:TypeDeclarationShape
     a sh:SPARQLConstraint ;
     sh:message "Violation of standard practice: Missing explicit type declaration" ;
     sh:select """
-      SELECT (?p AS ?path) ?value
+      SELECT $this (?p AS ?path) ?value
       WHERE {
         ?s ?p ?value .
         FILTER NOT EXISTS { ?s a ?o }
