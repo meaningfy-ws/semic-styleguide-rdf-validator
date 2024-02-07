@@ -1,0 +1,25 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# TODO:
+# - Could there be a way to test for a distinct shapes namespace?
+# - Could there be a way to test for a freestanding property shape?
+# - Could there be a way to test if every class is mirrored by a shape?
+
+# this is as close we can get to the semantics of the rule
+# i.e. any other type declared implies the shape is an extension
+# TODO:
+# - Also reproduce this for DatatypeProperty, ObjectProperty?
+# - Could there be a better way to express that something cannot be both?
+ex:AvoidClassExtensionShape
+  a sh:NodeShape ;
+  sh:targetClass sh:NodeShape ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:message "Non-observance of SEMIC rule DSC-R4: Avoid classes extended as node shapes" ;
+    sh:severity sh:Warning ;
+    sh:in (sh:NodeShape) ;
+  ] .

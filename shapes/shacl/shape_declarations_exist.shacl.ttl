@@ -1,0 +1,42 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# this is overlapped by SC-R2 only_owl_resources which is a subset
+# but caters to use cases where both ontology and shapes are in one file/graph
+# TODO: perhaps this is redundant and can instead be a common shape?
+ex:OnlyOWLSHACLResourcesShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:message "Violation of SEMIC rule DSC-R1: Only SHACL (and OWL) class and property declarations shall be used" ;
+    sh:in (owl:Ontology owl:Class owl:DatatypeProperty owl:ObjectProperty owl:AnnotationProperty rdfs:Datatype sh:NodeShape sh:PropertyShape) ;
+  ] .
+
+ex:NodeShapeExistsShape
+  a sh:NodeShape ;
+  sh:targetNode sh:NodeShape ;
+  sh:property [
+    sh:path [ sh:inversePath rdf:type ] ;
+    sh:minCount 1 ;
+    sh:message "Violation of SEMIC rule DSC-R1: SHACL shape declarations shall exist" ;
+  ]
+.
+
+# # this does not make sense because a shapes file may not have property shapes
+# # TODO: but if there are no node shapes, can there be standalone property shapes?
+# #       perhaps that is the subject of SEMIC rule DSC-R4 where "freestanding" is mentioned?
+# #       (i.e. should it be node OR property shape exists?)
+# ex:PropertyShapeExistsShape
+#   a sh:NodeShape ;
+#   sh:targetNode sh:PropertyShape ;
+#   sh:property [
+#     sh:path [ sh:inversePath rdf:type ] ;
+#     sh:minCount 1 ;
+#     sh:message "Non-observance of SEMIC rule DSC-R1: SHACL property declarations shall exist" ;
+#     sh:severity sh:Warning ;
+#   ]
+# .

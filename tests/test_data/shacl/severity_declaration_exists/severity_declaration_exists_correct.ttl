@@ -1,0 +1,15 @@
+@prefix ex: <http://example.org/> .
+@prefix exsh: <http://example.org/shapes/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+exsh:ValidNodeShapeWOProperty a sh:NodeShape .
+exsh:ValidNodeShapeWOProperty sh:severity sh:Warning .
+
+exsh:ValidNodeShapeWPropertyNamed a sh:NodeShape .
+exsh:ValidNodeShapeWPropertyNamed sh:property exsh:ValidPropertyShape .
+exsh:ValidPropertyShape a sh:PropertyShape .
+exsh:ValidPropertyShape sh:severity sh:Warning .
+
+exsh:ValidNodeShapeWPropertyBNode a sh:NodeShape .
+exsh:ValidNodeShapeWPropertyBNode sh:property [ sh:severity sh:Warning ] .
