@@ -1,0 +1,71 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# Define classes Alpha, Beta, and Gamma
+ex:Alpha a owl:Class .
+ex:Beta a owl:Class .
+ex:Gamma a owl:Class .
+
+# Define a class Delta as the union of Alpha, Beta, and Gamma
+ex:Delta a owl:Class ;
+  owl:unionOf ( ex:Alpha ex:Beta ex:Gamma ) .
+
+# Define classes Apple and Banana
+ex:Apple a owl:Class .
+ex:Banana a owl:Class .
+
+# Define a class Fruit as the complement of Apple
+ex:Fruit a owl:Class ;
+  owl:complementOf ex:Apple .
+
+# Define classes Car and Automobile as equivalent
+ex:Car a owl:Class.
+ex:Automobile a owl:Class.
+
+ex:Car owl:equivalentClass ex:Automobile.
+
+# Define classes RedColor and BlueColor
+ex:RedColor a owl:Class.
+ex:BlueColor a owl:Class.
+
+# Declare that RedColor is disjoint with BlueColor
+ex:RedColor owl:disjointWith ex:BlueColor.
+
+# Individuals
+ex:Person1 a owl:Class .
+ex:Person2 a owl:Class .
+ex:Car1 a owl:Class .
+ex:Car2 a owl:Class .
+
+# Object Properties
+ex:hasOwner a owl:ObjectProperty .
+ex:owns a owl:ObjectProperty .
+
+# InverseOf Example
+ex:hasOwner owl:inverseOf ex:owns .
+
+# oneOf Example
+ex:Color a owl:Class ;
+         a owl:Class ;
+         owl:oneOf ( ex:Red ex:Green ex:Blue ) .
+
+# hasKey Example
+ex:Employee a owl:Class ;
+            owl:hasKey ( ex:employeeID ) .
+
+# SameAs Example
+ex:Person1 owl:sameAs ex:Person2 .
+
+ex:CarWOwner
+a owl:Class ;
+rdfs:subClassOf [
+  a owl:Restriction ;
+] .
+
+ex:carOwner
+a owl:ObjectProperty ;
+rdfs:subPropertyOf [
+  a owl:Restriction ;
+] .

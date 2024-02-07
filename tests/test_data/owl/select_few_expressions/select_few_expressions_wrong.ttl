@@ -1,0 +1,49 @@
+@prefix ex: <http://example.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+ex:InvalidExpressiveClass
+  a owl:Class ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:label "Example Label" ;
+  skos:prefLabel "Preferred Label" ;
+  skos:altLabel "Alternative Label" ;
+  rdfs:comment "Example Comment" ;
+  skos:definition "Example Definition" ;
+  skos:scopeNote "Example Scope Note" ;
+  skos:editorialNote "Example Editorial Note" ;
+  skos:changeNote "Example Change Note" ;
+  skos:historyNote "Example History Note" ;
+  skos:example "Example Example" ;
+  skos:seeAlso "asdasd" .
+
+ex:InvalidExpressiveDataProperty
+  a owl:DatatypeProperty ;
+  rdfs:subPropertyOf owl:Thing ;
+  rdfs:label "Example Label" ;
+  skos:prefLabel "Preferred Label" ;
+  skos:altLabel "Alternative Label" ;
+  rdfs:comment "Example Comment" ;
+  skos:definition "Example Definition" ;
+  skos:scopeNote "Example Scope Note" ;
+  skos:editorialNote "Example Editorial Note" ;
+  skos:changeNote "Example Change Note" ;
+  skos:historyNote "Example History Note" ;
+  skos:example "Example Example" ;
+  skos:seeAlso "asdasd" .
+
+ex:InvalidExpressiveObjectProperty
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf owl:Thing ;
+  rdfs:label "Example Label" ;
+  skos:prefLabel "Preferred Label" ;
+  skos:altLabel "Alternative Label" ;
+  rdfs:comment "Example Comment" ;
+  skos:definition "Example Definition" ;
+  skos:scopeNote "Example Scope Note" ;
+  skos:editorialNote "Example Editorial Note" ;
+  skos:changeNote "Example Change Note" ;
+  skos:historyNote "Example History Note" ;
+  skos:example "Example Example" ;
+  skos:seeAlso "asdasd" .

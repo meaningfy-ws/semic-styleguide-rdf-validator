@@ -1,0 +1,54 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:NoAdvancedDefinitionsShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path [
+      sh:alternativePath (
+        owl:unionOf
+        owl:complementOf
+        owl:equivalentClass
+        owl:disjointWith
+        owl:inverseOf
+        owl:oneOf
+        owl:sameAs
+        owl:hasKey
+        owl:cardinality
+        owl:minCardinality
+        owl:maxCardinality
+        owl:allValuesFrom
+        owl:someValuesFrom
+        owl:hasValue
+      )
+    ] ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used" ;
+  ]
+.
+
+ex:NoBNodeSubsumptionShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path [ sh:alternativePath ( rdfs:subClassOf rdfs:subPropertyOf ) ] ;
+    sh:nodeKind sh:IRI ;
+    sh:message "Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used (bNodes in subsumption)" ;
+  ]
+.
+
+# the following are not allowed by derivation from SC-R2 only_owl_resources
+# owl:FunctionalProperty
+# owl:TransitiveProperty
+# owl:SymmetricProperty
+# owl:AsymmetricProperty
+# owl:ReflexiveProperty
+# owl:IrreflexiveProperty

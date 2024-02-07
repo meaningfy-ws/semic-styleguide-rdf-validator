@@ -1,0 +1,101 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# these are "derived" recommendations from the rule based on best practice
+# combining what is limited by the conventions and what for e.g. ePO uses
+
+# upper cardinalities are not tested as they wouldn't be caught
+# because other incorrect states exist in the same test file
+
+ex:MinOntologyHeaderShape
+  a sh:NodeShape ;
+  sh:targetClass owl:Ontology ;
+
+  # Versioning metadata
+
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:datatype xsd:string ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (owl:versionInfo <xsd:string>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  sh:property [
+    sh:path owl:versionIRI ;
+    sh:nodeKind sh:IRI ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (owl:versionIRI <xsd:anyURI>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  # Provenance metadata
+
+  sh:property [
+    sh:path dct:created ;
+    sh:datatype xsd:date ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:created <xsd:date>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  sh:property [
+    sh:path dct:issued ;
+    sh:datatype xsd:date ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:issued <xsd:date>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  sh:property [
+    sh:path dct:publisher ;
+    sh:datatype xsd:string ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:publisher <xsd:string>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  # Descriptive metadata
+  # the upper cardinalities are not restricted as SHACL doesn't check if
+  # language tags are the same. if per-tag cardinality is to be enforced
+  # then something like max_one_label has to be done, which is more complex
+
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype rdf:langString ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:title <rdf:langString>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+  ] ;
+
+  sh:property [
+    sh:path dct:description ;
+    sh:datatype rdf:langString ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:title <rdf:langString>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+  ] ;
+
+  # Licensing information
+  # while dct may not prescribe a cardinality for this it is safe
+  # to assume one can expect multiple licenses, so no upper cardinality here
+
+  sh:property [
+    sh:path dct:license ;
+    sh:datatype xsd:string ;
+    sh:severity sh:Warning ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:license <xsd:string>)" ;
+    sh:minCount 1 ;
+  ] .
