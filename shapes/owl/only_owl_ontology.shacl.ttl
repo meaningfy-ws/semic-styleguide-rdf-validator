@@ -33,6 +33,7 @@ ex:OnlyOWLOntologyShape
   sh:property [
     sh:path [ sh:inversePath rdf:type ] ;
     sh:minCount 1 ;
+    sh:maxCount 1 ; # this is not currently tested due to single file
     sh:message "Violation of SEMIC rule SC-R1: Missing OWL ontology declaration" ;
   ]
 .
