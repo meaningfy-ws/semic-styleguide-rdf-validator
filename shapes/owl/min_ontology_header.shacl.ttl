@@ -11,6 +11,9 @@
 # these are "derived" recommendations from the rule based on best practice
 # combining what is limited by the conventions and what for e.g. ePO uses
 
+# upper cardinalities are not tested as they wouldn't be caught
+# because other incorrect states exist in the same test file
+
 ex:MinOntologyHeaderShape
   a sh:NodeShape ;
   sh:targetClass owl:Ontology ;
@@ -23,6 +26,7 @@ ex:MinOntologyHeaderShape
     sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (owl:versionInfo <xsd:string>)" ;
     sh:severity sh:Warning ;
     sh:minCount 1 ;
+    sh:maxCount 1 ;
   ] ;
 
   sh:property [
@@ -31,6 +35,7 @@ ex:MinOntologyHeaderShape
     sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (owl:versionIRI <xsd:anyURI>)" ;
     sh:severity sh:Warning ;
     sh:minCount 1 ;
+    sh:maxCount 1 ;
   ] ;
 
   # Provenance metadata
@@ -41,6 +46,7 @@ ex:MinOntologyHeaderShape
     sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:created <xsd:date>)" ;
     sh:severity sh:Warning ;
     sh:minCount 1 ;
+    sh:maxCount 1 ;
   ] ;
 
   sh:property [
@@ -49,6 +55,7 @@ ex:MinOntologyHeaderShape
     sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:issued <xsd:date>)" ;
     sh:severity sh:Warning ;
     sh:minCount 1 ;
+    sh:maxCount 1 ;
   ] ;
 
   sh:property [
@@ -57,9 +64,13 @@ ex:MinOntologyHeaderShape
     sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:publisher <xsd:string>)" ;
     sh:severity sh:Warning ;
     sh:minCount 1 ;
+    sh:maxCount 1 ;
   ] ;
 
   # Descriptive metadata
+  # the upper cardinalities are not restricted as SHACL doesn't check if
+  # language tags are the same. if per-tag cardinality is to be enforced
+  # then something like max_one_label has to be done, which is more complex
 
   sh:property [
     sh:path dct:title ;
@@ -78,6 +89,8 @@ ex:MinOntologyHeaderShape
   ] ;
 
   # Licensing information
+  # while dct may not prescribe a cardinality for this it is safe
+  # to assume one can expect multiple licenses, so no upper cardinality here
 
   sh:property [
     sh:path dct:license ;
