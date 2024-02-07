@@ -14,12 +14,14 @@ ex:SeverityDeclarationExistsShape
       sh:property [
         sh:path sh:severity ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
       ]
     ]
     [
       sh:property [
         sh:path (sh:property sh:severity) ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
         ]
     ]
   )

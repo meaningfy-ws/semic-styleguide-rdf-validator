@@ -11,3 +11,10 @@ exsh:InvalidPropertyShape a sh:PropertyShape .
 
 exsh:InvalidNodeShapeWPropertyBNode a sh:NodeShape .
 exsh:InvalidNodeShapeWPropertyBNode sh:property [ sh:message "I got no severity" ] .
+
+exsh:InvalidNodeShapeWPropertyMultiSeverities a sh:NodeShape .
+exsh:InvalidNodeShapeWPropertyMultiSeverities sh:property [
+  sh:message "I got no severity"  ;
+  sh:severity sh:Warning ;
+  sh:severity sh:Violation ;
+] .

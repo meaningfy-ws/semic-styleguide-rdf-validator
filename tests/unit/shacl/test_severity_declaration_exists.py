@@ -54,7 +54,7 @@ def test_shacl_validation_wrong(shacl_data, wrong_data):
     assert not conforms, "SHACL validation succeeded, but it should have failed"
 
     # assert number of report results
-    assert results_count == 3
+    assert results_count == 4
 
 
 if __name__ == "__main__":
