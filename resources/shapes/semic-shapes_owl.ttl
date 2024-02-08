@@ -1,0 +1,515 @@
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+ex:NoDomainRangeShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path rdfs:domain ;
+    sh:maxCount 0 ;
+    sh:message "Non-observance of SEMIC rule SC-R2: No expressions of property domain shall be used" ;
+    sh:severity sh:Warning ;
+  ] ;
+  sh:property [
+    sh:path rdfs:range ;
+    sh:maxCount 0 ;
+    sh:message "Non-observance of SEMIC rule SC-R2: No expressions of property range shall be used" ;
+    sh:severity sh:Warning ;
+  ] .
+
+ex:MinOneLexicalisationOptionalShape
+  rdf:type sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:message "Non-observance of SEMIC rule SC-R3: At least one lexicalisation label should exist" ;
+  sh:severity sh:Warning ;
+  sh:or (
+    [
+      sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1
+      ]
+    ]
+    [
+      sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1
+      ]
+    ]
+  ) .
+
+ex:OnlyOWLResourcesShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:message "Violation of SEMIC rule SC-R2: Only limited OWL class and property declarations shall be used" ;
+    sh:in (owl:Ontology owl:Class owl:DatatypeProperty owl:ObjectProperty owl:AnnotationProperty rdfs:Datatype) ;
+  ] .
+
+# TODO: Should we target any IRI? Not easily apparent if that would work.
+
+# PERF total ~66% reduction in time if all here deactivated (ref: ePO-core)
+
+# PERF ~13% reduction in time if deactivated (ref: ePO-core)
+ex:OnlyClassSubsumptionShape
+  a sh:NodeShape ;
+  sh:targetClass owl:Class ;
+  sh:deactivated false ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL class relations shall be used" ;
+    sh:select """
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+      SELECT $this (?p AS ?path) ?value
+      WHERE {
+        $this ?p ?value .
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subClassOf))
+        FILTER(isIRI(?value))
+      }
+      """ ;
+  ]
+.
+
+# NOTE: for some reason rdf:Property (inference) or advanced SPARQL target (to
+# capture both types of properties) does not work
+
+# PERF ~33% reduction in time if deactivated (ref: ePO-core)
+ex:OnlyObjPropSubsumptionShape
+  a sh:NodeShape ;
+  sh:targetClass owl:ObjectProperty ;
+  sh:deactivated false ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used" ;
+    sh:select """
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+      SELECT $this (?p AS ?path) ?value
+      WHERE {
+        $this ?p ?value .
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subPropertyOf))
+        FILTER(isIRI(?value))
+      }
+      """ ;
+  ]
+.
+
+# PERF ~20% reduction in time if deactivated (ref: ePO-core)
+ex:OnlyDataPropSubsumptionShape
+  a sh:NodeShape ;
+  sh:targetClass owl:DatatypeProperty ;
+  sh:deactivated false ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used" ;
+    sh:select """
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+      SELECT $this (?p AS ?path) ?value
+      WHERE {
+        $this ?p ?value .
+        FILTER(?p not in (rdf:type, rdfs:isDefinedBy, rdfs:subPropertyOf))
+        FILTER(isIRI(?value))
+      }
+      """ ;
+  ]
+.
+
+# Uncomment the individual property restrictions to imply "minimum required"
+
+ex:SelectFewExpressionsShape
+  rdf:type sh:NodeShape ;
+  sh:closed true ;
+  sh:ignoredProperties (rdf:type rdfs:subClassOf rdfs:subPropertyOf rdfs:isDefinedBy owl:imports) ;
+  sh:severity sh:Info ;
+  sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall be limited to a select few expressions" ;
+  sh:targetSubjectsOf rdf:type ;
+
+  # Concept labels
+  sh:property [
+    sh:path rdfs:label ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept labels (rdfs:label) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:prefLabel ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept labels (skos:prefLabel) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:altLabel ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept labels (skos:altLabel) are recommended." ;
+  ] ;
+
+  # Concept definitions
+  sh:property [
+    sh:path rdfs:comment ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept definitions (rdfs:comment) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:definition ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept definitions (skos:definition) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:scopeNote ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Concept definitions (skos:scopeNote) are recommended." ;
+  ] ;
+
+  # Notes and comments
+  sh:property [
+    sh:path rdfs:comment ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (rdfs:comment) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:editorialNote ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (skos:editorialNote) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:changeNote ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (skos:changeNote) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:historyNote ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (skos:historyNote) are recommended." ;
+  ] ;
+
+  sh:property [
+    sh:path skos:example ;
+    # sh:minCount 1 ;
+    # sh:severity sh:Warning ;
+    # sh:message "Notes and comments (skos:example) are recommended." ;
+  ] ;
+
+  # subsume also the minimum header properties (min_ontology_header)
+
+  sh:property [
+    sh:path owl:versionIRI ;
+  ] ;
+
+  sh:property [
+    sh:path dct:created ;
+  ] ;
+
+    sh:property [
+    sh:path dct:issued
+ ;
+  ] ;
+
+    sh:property [
+    sh:path dct:publisher ;
+  ] ;
+
+    sh:property [
+    sh:path dct:title ;
+  ] ;
+
+    sh:property [
+    sh:path dct:description ;
+  ] ;
+
+    sh:property [
+    sh:path dct:license ;
+  ] ;
+.
+
+# inpsired by https://stackoverflow.com/questions/55829024/can-shacl-express-constraints-about-the-entire-data-scope
+
+# this is good to have, even if not mandated in any convention or standard
+# PERF ~6% reduction in time if deactivated (ref: ePO-core)
+ex:TypeDeclarationShape
+  a sh:NodeShape ;
+  sh:targetNode ex:DummyNode ;
+  sh:deactivated false ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Violation of standard practice: Missing explicit type declaration" ;
+    sh:select """
+      SELECT $this (?p AS ?path) ?value
+      WHERE {
+        ?s ?p ?value .
+        FILTER NOT EXISTS { ?s a ?o }
+      }
+      """ ;
+  ]
+.
+
+ex:OnlyOWLOntologyShape
+  a sh:NodeShape ;
+  sh:targetNode owl:Ontology ;
+  sh:property [
+    sh:path [ sh:inversePath rdf:type ] ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ; # this is not currently tested due to single file
+    sh:message "Violation of SEMIC rule SC-R1: Missing OWL ontology declaration" ;
+  ]
+.
+
+# second regex from https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+# handles x.y.z-rc1 but not z.y.z-rc.1 (both allowed by SemVer but maybe not in practice e.g. ePO)
+
+ex:SemanticVersioningShape
+  a sh:NodeShape ;
+  sh:targetClass owl:Ontology ;
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    sh:pattern "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$" ;
+    sh:message "Violation of SEMIC rule PC-R3: The ontology shall be versioned following the SemVer specification" ;
+  ] .
+
+ex:NoAdvancedDefinitionsShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path [
+      sh:alternativePath (
+        owl:unionOf
+        owl:complementOf
+        owl:equivalentClass
+        owl:disjointWith
+        owl:inverseOf
+        owl:oneOf
+        owl:sameAs
+        owl:hasKey
+        owl:cardinality
+        owl:minCardinality
+        owl:maxCardinality
+        owl:allValuesFrom
+        owl:someValuesFrom
+        owl:hasValue
+      )
+    ] ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used" ;
+  ]
+.
+
+ex:NoBNodeSubsumptionShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path [ sh:alternativePath ( rdfs:subClassOf rdfs:subPropertyOf ) ] ;
+    sh:nodeKind sh:IRI ;
+    sh:message "Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used (bNodes in subsumption)" ;
+  ]
+.
+
+# the following are not allowed by derivation from SC-R2 only_owl_resources
+# owl:FunctionalProperty
+# owl:TransitiveProperty
+# owl:SymmetricProperty
+# owl:AsymmetricProperty
+# owl:ReflexiveProperty
+# owl:IrreflexiveProperty
+
+# these are "derived" recommendations from the rule based on best practice
+# combining what is limited by the conventions and what for e.g. ePO uses
+
+# upper cardinalities are not tested as they wouldn't be caught
+# because other incorrect states exist in the same test file
+
+ex:MinOntologyHeaderShape
+  a sh:NodeShape ;
+  sh:targetClass owl:Ontology ;
+
+  # Versioning metadata
+
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:datatype xsd:string ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (owl:versionInfo <xsd:string>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  sh:property [
+    sh:path owl:versionIRI ;
+    sh:nodeKind sh:IRI ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (owl:versionIRI <xsd:anyURI>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  # Provenance metadata
+
+  sh:property [
+    sh:path dct:created ;
+    sh:datatype xsd:date ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:created <xsd:date>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  sh:property [
+    sh:path dct:issued ;
+    sh:datatype xsd:date ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:issued <xsd:date>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  sh:property [
+    sh:path dct:publisher ;
+    sh:datatype xsd:string ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:publisher <xsd:string>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+
+  # Descriptive metadata
+  # the upper cardinalities are not restricted as SHACL doesn't check if
+  # language tags are the same. if per-tag cardinality is to be enforced
+  # then something like max_one_label has to be done, which is more complex
+
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype rdf:langString ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:title <rdf:langString>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+  ] ;
+
+  sh:property [
+    sh:path dct:description ;
+    sh:datatype rdf:langString ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:title <rdf:langString>)" ;
+    sh:severity sh:Warning ;
+    sh:minCount 1 ;
+  ] ;
+
+  # Licensing information
+  # while dct may not prescribe a cardinality for this it is safe
+  # to assume one can expect multiple licenses, so no upper cardinality here
+
+  sh:property [
+    sh:path dct:license ;
+    sh:datatype xsd:string ;
+    sh:severity sh:Warning ;
+    sh:message "Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header (dct:license <xsd:string>)" ;
+    sh:minCount 1 ;
+  ] .
+
+# TODO:
+# - We need a better way to do this but unfortunately using the inverseOf
+#   technique with targetSubjectsOf and/or sh:class does not appear to work
+
+ex:NoAtomicVersionClassShape
+  a sh:NodeShape ;
+  sh:targetClass owl:Class ;
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ] ;
+  sh:property [
+    sh:path owl:versionIRI ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ]
+.
+
+ex:NoAtomicVersionObjPropShape
+  a sh:NodeShape ;
+  sh:targetClass owl:ObjectProperty ;
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ] ;
+    sh:property [
+    sh:path owl:versionIRI ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ]
+.
+
+ex:NoAtomicVersionDataPropShape
+  a sh:NodeShape ;
+  sh:targetClass owl:DatatypeProperty ;
+  sh:property [
+    sh:path owl:versionInfo ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ] ;
+    sh:property [
+    sh:path owl:versionIRI ;
+    sh:maxCount 0 ;
+    sh:message "Violation of SEMIC rule PC-R4: Never version on atomic elements" ;
+  ]
+.
+
+ex:MaxOneRDFLabelShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:uniqueLang true ;
+  ] ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:qualifiedMaxCount 1 ;
+    sh:qualifiedValueShape [
+      sh:datatype xsd:string ;
+    ] ;
+    sh:message "Violation of standard practice: More than one `rdfs:label` exists without a language tag" ;
+  ]
+.
+
+ex:MaxOneSKOSLabelShape
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdf:type ;
+  sh:property [
+    sh:path skos:prefLabel ;
+    sh:uniqueLang true ;
+  ] ;
+  sh:property [
+    sh:path skos:prefLabel ;
+    sh:qualifiedMaxCount 1 ;
+    sh:qualifiedValueShape [
+      sh:datatype xsd:string ;
+    ] ;
+    sh:message "Violation of standard practice: More than one `skos:prefLabel` exists without a language tag" ;
+  ]
+.

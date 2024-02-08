@@ -19,6 +19,9 @@ ex:OnlyClassSubsumptionShape
     a sh:SPARQLConstraint ;
     sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL class relations shall be used" ;
     sh:select """
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
       SELECT $this (?p AS ?path) ?value
       WHERE {
         $this ?p ?value .
@@ -41,6 +44,9 @@ ex:OnlyObjPropSubsumptionShape
     a sh:SPARQLConstraint ;
     sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used" ;
     sh:select """
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
       SELECT $this (?p AS ?path) ?value
       WHERE {
         $this ?p ?value .
@@ -60,6 +66,9 @@ ex:OnlyDataPropSubsumptionShape
     a sh:SPARQLConstraint ;
     sh:message "Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used" ;
     sh:select """
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
       SELECT $this (?p AS ?path) ?value
       WHERE {
         $this ?p ?value .

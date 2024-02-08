@@ -1,5 +1,6 @@
 BUILD_PRINT = \e[1;34mSTEP: \e[0m
-SHAPES_FILE = semic-shapes.ttl
+SHAPES_FILE_OWL = semic-shapes_owl.ttl
+SHAPES_FILE_SHACL = semic-shapes_shacl.ttl
 DATA_FILE_CORRECT = example-data_correct.ttl
 DATA_FILE_WRONG = example-data_wrong.ttl
 
@@ -10,13 +11,20 @@ install:
 test:
 	@ pytest
 
+# NOTE: please validate these files yourself e.g. with Apache Jena's `riot --validate`
 generate_aggregate_shapes:
-	@ echo "$(BUILD_PRINT)Creating aggregate shapes file output/$(SHAPES_FILE)"
+	@ echo "$(BUILD_PRINT)Creating aggregate OWL shapes file output/$(SHAPES_FILE_OWL)"
 	@ mkdir -p output
-	@ rm -f output/$(SHAPES_FILE)
-	@ find shapes -type f -iname "*.shacl.ttl" -exec grep '^@prefix' {} \; | awk '!x[$$0]++' > output/$(SHAPES_FILE)
-	@ find shapes -type f -iname "*.shacl.ttl" -exec grep -v '^@prefix' {} \; >> output/$(SHAPES_FILE)
+	@ rm -f output/$(SHAPES_FILE_OWL)
+	@ find shapes/owl -type f -iname "*.shacl.ttl" -exec grep '^@prefix' {} \; | awk '!x[$$0]++' > output/$(SHAPES_FILE_OWL)
+	@ find shapes/owl -type f -iname "*.shacl.ttl" -exec grep -v '^@prefix' {} \; >> output/$(SHAPES_FILE_OWL)
+	@ echo "$(BUILD_PRINT)Creating aggregate SHACL shapes file output/$(SHAPES_FILE_SHACL)"
+	@ mkdir -p output
+	@ rm -f output/$(SHAPES_FILE_SHACL)
+	@ find shapes/shacl -type f -iname "*.shacl.ttl" -exec grep '^@prefix' {} \; | awk '!x[$$0]++' > output/$(SHAPES_FILE_SHACL)
+	@ find shapes/shacl -type f -iname "*.shacl.ttl" -exec grep -v '^@prefix' {} \; >> output/$(SHAPES_FILE_SHACL)
 
+# WARNING: does not yet separate OWL and SHACL
 generate_aggregate_data:
 	@ echo "$(BUILD_PRINT)Creating aggregate example data files"
 	@ mkdir -p output
@@ -35,4 +43,7 @@ list_rules_covered:
 
 clean:
 	@ echo "$(BUILD_PRINT)Cleaning up output folder"
-	@ rm -v output/$(SHAPES_FILE)
+	@ rm -fv output/$(SHAPES_FILE_OWL)
+	@ rm -fv output/$(SHAPES_FILE_SHACL)
+	@ rm -fv output/$(DATA_FILE_CORRECT)
+	@ rm -fv output/$(DATA_FILE_WRONG)
