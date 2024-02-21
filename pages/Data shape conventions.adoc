@@ -43,7 +43,7 @@ The data shapes shall be expressed in SHACL.
  *Title:* Loose versus rigid constraints
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* DSC-R2
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r2[DSC-R2]
 
 |*Statement:*
 
@@ -62,7 +62,7 @@ In a Core Vocabulary, then the data shape constraints shall be as loose as possi
  *Title:* Open and Closed world assumptions
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* DSC-R3
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r3[DSC-R3]
 
 |*Statement:*
 
@@ -81,7 +81,7 @@ assumptions shall be adopted, and for validation purposes, a closed-world assump
  *Title:* Shape definitions
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* DSC-R4
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r4[DSC-R4]
 
 |*Statement:*
 
@@ -113,7 +113,7 @@ A node shape targeting the class `sh:NodeShape` with a property value type membe
  *Title:* Data shape severity
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* DSC-R5
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r5[DSC-R5]
 
 |*Statement:*
 
@@ -122,7 +122,7 @@ It is recommended to use constraint severity for distinguishing critical violati
 
 *Checkable:* Yes
 
-**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/severity_declaration_exists.shacl.ttl[severity_declaration_exists.shacl.ttl]
+**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/severity_declaration_exists.shacl.ttl[severity_declaration_exists.shacl.ttl]
 
 *Shape Description:*
 

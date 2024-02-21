@@ -8,7 +8,7 @@
  *Title:* 5-star Linked Open Data
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* PC-R1
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-publication-conventions.html#sec:pc-r1[PC-R1]
 
 |*Statement:*
 
@@ -27,14 +27,14 @@ Publishing data specifications shall be compliant with 5-star LOD criteria.
  *Title:* Persistent URI policy
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* PC-R2
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-publication-conventions.html#sec:pc-r2[PC-R2]
 
 |*Statement:*
 
 The URIs that are used to identify the terms modelled in the data specifications should be _dereferenceable Persistent URIs_
-[xref:references.adoc#ref:10rules-puri[10rules-puri]] and comply with a URI policy (or URI strategy).
+[https://semiceu.github.io/style-guide/1.0.0/references.html#ref:10rules-puri[10rules-puri]] and comply with a URI policy (or URI strategy).
 
-URIs that are well-defined according to such criteria are often denoted as PURIs [xref:references.adoc#ref:10rules-puri[10rules-puri]].
+URIs that are well-defined according to such criteria are often denoted as PURIs [https://semiceu.github.io/style-guide/1.0.0/references.html#ref:10rules-puri[10rules-puri]].
 
 SEMIC adheres to the EU persistent URI policy. Each SEMIC URI is dereferenceable in both machine representation (RDF
 artefacts) and human-readable (HTML artefact).
@@ -53,7 +53,7 @@ artefacts) and human-readable (HTML artefact).
  *Title:* Version management
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* PC-R3
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-publication-conventions.html#sec:pc-r3[PC-R3]
 
 |*Statement:*
 
@@ -85,7 +85,7 @@ A node shape targeting the class `owl:Class` with a property restriction on `owl
  *Title:* Artefact versioning
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* PC-R4
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-publication-conventions.html#sec:pc-r4[PC-R4]
 
 |*Statement:*
 
@@ -116,7 +116,7 @@ Node shapes targeting classes of {owl:Class, owl:ObjectProperty, owl:DatatypePro
  *Title:* URI dereferencing
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* PC-R5
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-publication-conventions.html#sec:pc-r5[PC-R5]
 
 |*Statement:*
 
@@ -135,7 +135,7 @@ Any URI identifiable resource devised in a data specification shall be dereferen
  *Title:* Human-readable form
 
 |{set:cellbgcolor: #f5f8fc}
-*Identifier* PC-R6
+*Identifier* https://semiceu.github.io/style-guide/1.0.0/gc-publication-conventions.html#sec:pc-r6[PC-R6]
 
 |*Statement:*
 

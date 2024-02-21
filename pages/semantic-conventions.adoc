@@ -14,8 +14,6 @@
 The formal ontology shall be expressed in OWL 2.
 |===
 
-=== *Formal Ontology Expression in OWL 2 Shape*:
-
 **Checkable:** Yes
 
 **Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_ontology.shacl.ttl[only_owl_ontology.shacl.ttl]
@@ -50,7 +48,7 @@ The formal ontology shall be expressed in OWL 2.
 The formal ontology shall be lightweight in its logical underpinning, focusing mainly on the concept declarations, generalisation axioms and annotations.
 |===
 
-=== *No rdfs:domain or rdfs:range Declarations Shape*
+=== *No rdfs:domain or rdfs:range Declarations*
 
 **Checkable:** Yes
 
@@ -72,7 +70,7 @@ A node shape targeting any subject of `rdf:type` with restrictions of maxCount=0
 **Desired State:** No rdfs:domain or rdfs:range declaration exists on any resource
 
 
-=== *Only OWL Resources Exist Shape*
+=== *Only OWL Resources Exist*
 
 **Checkable:** Yes
 
@@ -92,7 +90,7 @@ A node shape targeting any subjects of `rdf:type` with a restriction on the prop
 **Desired State:** Only OWL resources (instances declared to be one of the primary OWL types) exist
 
 
-=== *Using only  rdfs:subClassOf and rdfs:subPropertyOf Shape*
+=== *Using only  rdfs:subClassOf and rdfs:subPropertyOf*
 
 **Checkable:** Yes
 
@@ -129,7 +127,7 @@ A _closed_ node shape (ignoring certain properties) targeting the class `sh:Node
 
 **Desired State:** Expressions are limited to a select few properties
 
-=== *Minimum Set of Ontology Header Properties Shape*
+=== *Minimum Set of Ontology Header Properties*
 
 **Checkable:** Yes
 
@@ -146,7 +144,7 @@ Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header 
 
 **Desired State:** A minimum set of ontology header properties exist
 
-=== *No advanced OWL construct exists Shape*
+=== *No advanced OWL construct exists*
 
 **Checkable:** Yes
 
@@ -179,7 +177,7 @@ A node shape targeting all subjects of `rdf:type` with a property restriction on
 The choice in handling the lexicalisation of concepts shall be clearly defined and consistently implemented.
 |===
 
-=== *Primary Lexicalisation Properties Shape*
+=== *Primary Lexicalisation Properties*
 
 **Checkable:** Yes
 
@@ -195,7 +193,7 @@ A node shape targeting any subjects of `rdf:type` with restrictions of minCount=
 
 **Desired State:** At least one of the two primary lexicalisation properties exist for any resource
 
-=== *Cardinality Constraints on Lexicalisation Literals Shape*
+=== *Cardinality Constraints on Lexicalisation Literals*
 
 **Checkable:** Yes
 
@@ -207,7 +205,9 @@ A node shape targeting any subjects of `rdf:type` with restrictions of minCount=
 * Language {lang} has been used by {n} values (default SHACL message)
 * Language {?lang} used more than once (default SHACL message)
 
-**Non-Compliance Severity:** Violation
+**Non-Compliance Severity:** Violation.
+
+**Desired State:** All lexicalisation literals have a cardinality of zero or one with or without a language tag
 
 [[sec:sc-r4]]
 == Reasoning assumption
@@ -225,7 +225,7 @@ No reasoning capabilities shall be assumed.
 
 **Checkable:** NO
 
-**Why** Actionable by way of other rules (e.g. no advanced OWL features are to be used).
+**Why:** Actionable by way of other rules (e.g. no advanced OWL features are to be used).
 
 [[sec:sc-r5]]
 == Circular definitions
@@ -244,5 +244,5 @@ The data specification (semantic, conceptual, or shape) shall not use circular d
 
 **Checkable:** NO
 
-**Why** Most examples in this rule describe situations that are already restricted by other rules according to the conventions, e.g. usage of domain and range is not allowed, neither are OWL axioms like owl:equivalentClass. Only actionable example could be that about rdfs:subClassOf, but not sure how to implement self-reference in a shape (maybe DASH has something).
+**Why:** Most examples in this rule describe situations that are already restricted by other rules according to the conventions, e.g. usage of domain and range is not allowed, neither are OWL axioms like owl:equivalentClass. Only actionable example could be that about rdfs:subClassOf, but not sure how to implement self-reference in a shape (maybe DASH has something).
 
