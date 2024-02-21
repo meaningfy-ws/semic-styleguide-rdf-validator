@@ -1,0 +1,137 @@
+= Data shape conventions
+
+[[sec:dss-r1]]
+== Data shape language choice
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Data shape language choice
+|{set:cellbgcolor: #f5f8fc}
+
+*Identifier*  https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r1[DSC-R1]
+.
+|*Statement:*
+
+The data shapes shall be expressed in SHACL.
+|===
+
+**Checkable:** Yes
+
+**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl[shape_declarations_exist.shacl.ttl]
+
+**Shape Description:**
+
+* A node shape targeting all subjects of `rdf:type` with a property membership restriction to both the set of primary OWL and SHACL types
+
+* A node shape targeting the class `sh:NodeShape` with a restriction on the inverse of the propery `rdf:type` and minCount=1 (effectively saying there must be at least one instance of it)
+
+
+**Non-Compliance Message(s):**
+
+* Violation of SEMIC rule DSC-R1: Only SHACL (and OWL) class and property declarations shall be used
+
+* Violation of SEMIC rule DSC-R1: SHACL shape declarations shall exist
+
+**Non-Compliance Severity:** Violation
+
+**Desired State:** Only SHACL resources (instances declared to be one of the SHACL types and additionally also OWL) exist.
+
+[[sec:dsc-r2]]
+== Loose versus rigid constraints
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Loose versus rigid constraints
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* DSC-R2
+
+|*Statement:*
+
+In a Core Vocabulary, then the data shape constraints shall be as loose as possible, i.e., permissive, while in an Application Profile, the data shape constraints shall be as rigid as necessary, i.e. restrictive.
+|===
+
+**Checkable:** No.
+
+**Why:** It is not possible to verify whether a vocabulary is a component of an application profile. To implement such a check, options need to be provided, such as specifying an application profile for validation. Nevertheless, identifying violations in shapes that adhere or deviate from the application profile will pose a challenge.
+
+[[sec:dsc-r3]]
+== Open and Closed world assumptions
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Open and Closed world assumptions
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* DSC-R3
+
+|*Statement:*
+
+The data instantiating a core model may be fragmented across information systems. For representation purposes, open-world
+assumptions shall be adopted, and for validation purposes, a closed-world assumption shall be adopted.
+|===
+**Checkable:** No.
+
+**Why:** The open vs. closed world assumption is not easily verified in an automated manner. The conventions do not clearly articulate how this affects large ontologies, such as ePO.
+
+[[sec:dsc-r4]]
+== Shape definitions
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Shape definitions
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* DSC-R4
+
+|*Statement:*
+
+Each ontology class shall be mirrored by a `sh:NodeShape`. The property constraints may be embedded (contextualised) within node shapes or defined as freestanding.
+|===
+
+**Checkable:** Yes
+
+**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl[avoid_class_extension.shacl.ttl]
+
+**Shape Description:**
+
+A node shape targeting the class `sh:NodeShape` with a property value type membership restriction to `sh:NodeShape` (effectively saying this is by no means an extended shape of any kind - not just OWL class)
+
+**Non-Compliance Message(s):**
+
+* Non-observance of SEMIC rule DSC-R4: Avoid classes extended as node shapes.
+
+**Non-Compliance Severity:** Warning
+
+**Desired State:** A NodeShape is not declared to be of any other type.
+
+
+[[sec:dsc-r5]]
+== Data shape severity
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Data shape severity
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* DSC-R5
+
+|*Statement:*
+
+It is recommended to use constraint severity for distinguishing critical violations from non-critical recommendation warnings and from nice-to-have information.
+|===
+
+*Checkable:* Yes
+
+**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/severity_declaration_exists.shacl.ttl[severity_declaration_exists.shacl.ttl]
+
+*Shape Description:*
+
+A node shape is targeting at the class sh:NodeShape and includes a restriction of XONE (exactly or 'exclusively one of') on two sets of property shapes. The first set relates to the property sh:severity with an exact cardinality of 1. The second set relates to the sequence of properties (sh:property sh:severity) with an exact cardinality of 1, referring to any associated property shape. Essentially, this specification implies that either of these situations must exist.
+
+**Non-Compliance Message(s):**
+
+* Non-observation of SEMIC rule DSC-R5: Data shapes should be assigned a level of severity.
+
+**Non-Compliance Severity:** Warning
+
+**Desired State:** A NodeShape is not declared to be of any other type.

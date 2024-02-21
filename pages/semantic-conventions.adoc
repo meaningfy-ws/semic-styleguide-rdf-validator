@@ -14,15 +14,17 @@
 The formal ontology shall be expressed in OWL 2.
 |===
 
-*Formal Ontology Expression in OWL 2 Shape*:
+=== *Formal Ontology Expression in OWL 2 Shape*:
+
+**Checkable:** Yes
+
+**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_ontology.shacl.ttl[only_owl_ontology.shacl.ttl]
+
+**Shape Description:**
 
 * A node shape targeting a dummy focus node with a custom SPARQL query that checks if there does NOT exist a statement with `rdf:type` (not mandated but good to have as this is always an implied assumption)
 
 * A node shape targeting the focus node `owl:Ontology` with a restriction of minCount=1 and maxCount=1 on the inverse of the path `rdf:type` (there must exist exactly one instance of the target node)
-
-**Checkable:** Yes
-
-**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_ontology.shacl.ttl[only_owl_ontology.shacl.ttl]
 
 **Non-Compliance Message(s):**
 
@@ -48,15 +50,15 @@ The formal ontology shall be expressed in OWL 2.
 The formal ontology shall be lightweight in its logical underpinning, focusing mainly on the concept declarations, generalisation axioms and annotations.
 |===
 
-This rule requires multiple SHACL shapes:
-
-*No rdfs:domain or rdfs:range Declarations Shape*
-
-A node shape targeting any subject of `rdf:type` with restrictions of maxCount=0 on the properties `rdfs:domain` and `rdfs:range`
+=== *No rdfs:domain or rdfs:range Declarations Shape*
 
 **Checkable:** Yes
 
 **Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_domain_range_opt.shacl.ttl[no_domain_range_opt.shacl.ttl]
+
+**Shape Description:**
+
+A node shape targeting any subject of `rdf:type` with restrictions of maxCount=0 on the properties `rdfs:domain` and `rdfs:range`
 
 
 **Non-Compliance Message(s):**
@@ -70,15 +72,16 @@ A node shape targeting any subject of `rdf:type` with restrictions of maxCount=0
 **Desired State:** No rdfs:domain or rdfs:range declaration exists on any resource
 
 
-*Only OWL Resources Exist Shape*
-
-A node shape targeting any subjects of `rdf:type` with a restriction on the property `rdf:type` having values only from the set {owl:Ontology, owl:Class, owl:DatatypeProperty, owl:ObjectProperty, owl:AnnotationProperty}
+=== *Only OWL Resources Exist Shape*
 
 **Checkable:** Yes
 
 **Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl[only_owl_resources.shacl.ttl
 ]
 
+**Shape Description:**
+
+A node shape targeting any subjects of `rdf:type` with a restriction on the property `rdf:type` having values only from the set {owl:Ontology, owl:Class, owl:DatatypeProperty, owl:ObjectProperty, owl:AnnotationProperty}
 
 **Non-Compliance Message(s):**
 
@@ -89,11 +92,13 @@ A node shape targeting any subjects of `rdf:type` with a restriction on the prop
 **Desired State:** Only OWL resources (instances declared to be one of the primary OWL types) exist
 
 
-*Using only  rdfs:subClassOf and rdfs:subPropertyOf Shape*
+=== *Using only  rdfs:subClassOf and rdfs:subPropertyOf Shape*
 
 **Checkable:** Yes
 
 **Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl[only_owl_resources.shacl.ttl]
+
+**Shape Description:**
 
 **Non-Compliance Message(s):**
 
@@ -105,14 +110,16 @@ A node shape targeting any subjects of `rdf:type` with a restriction on the prop
 
 **Desired State:** Only rdfs:subClassOf are used between classes and rdfs:subPropertyOf between properties
 
-*Limited Expressions to Select Properties*
+=== *Limited Expressions to Select Properties*
 
-A _closed_ node shape (ignoring certain properties) targeting the class `sh:NodeShape` with several property shapes representing the limited set, with only the property path declared for each.
 
 **Checkable:** Yes
 
-**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/select_few_expressions.shacl.ttl[select_few_expressions.shacl.ttl]
+**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/select_few_expressions.shacl.ttl[select_few_expressions.shacl.ttl]
 
+**Shape Description**
+
+A _closed_ node shape (ignoring certain properties) targeting the class `sh:NodeShape` with several property shapes representing the limited set, with only the property path declared for each.
 
 **Non-Compliance Message(s):**
 
@@ -122,12 +129,15 @@ A _closed_ node shape (ignoring certain properties) targeting the class `sh:Node
 
 **Desired State:** Expressions are limited to a select few properties
 
-*Minimum Set of Ontology Header Properties Shape*
-A node shape targeting the class `owl:Ontology` with a property restriction for each property from a predetermined set (combining what's mentioned in the conventions and what's used in ePO) and minCount=1, and corresponding datatype restrictions (`rdf:langString` for those expected to be language-tagged, `xsd:date` for dates, `sh:IRI` for IRIs and `xsd:string` otherwise.
+=== *Minimum Set of Ontology Header Properties Shape*
 
 **Checkable:** Yes
 
-**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_ontology_header.shacl.ttl[min_ontology_header.shacl.ttl]
+**Shape File:** https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_ontology_header.shacl.ttl[min_ontology_header.shacl.ttl]
+
+**Shape Description:**
+
+A node shape targeting the class `owl:Ontology` with a property restriction for each property from a predetermined set (combining what's mentioned in the conventions and what's used in ePO) and minCount=1, and corresponding datatype restrictions (`rdf:langString` for those expected to be language-tagged, `xsd:date` for dates, `sh:IRI` for IRIs and `xsd:string` otherwise.
 
 **Non-Compliance Message(s):**
 Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header ({?property} <{?type}>)
@@ -136,15 +146,19 @@ Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header 
 
 **Desired State:** A minimum set of ontology header properties exist
 
-*No advanced OWL construct exists Shape*
-A node shape targeting all subjects of `rdf:type` with a property restriction on an alternativePath list including all of the advanced OWL properties, and another similar shape with only the subsumption properties restricted to `sh:IRI` node kind (effectively forbidding use of blank nodes as values through those properties).
+=== *No advanced OWL construct exists Shape*
+
 **Checkable:** Yes
 
-**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_advanced_definitions.shacl.ttl[no_advanced_definitions.shacl.ttl]
+**Shape File:** https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_advanced_definitions.shacl.ttl[no_advanced_definitions.shacl.ttl]
+
+**Shape Description:**
+
+A node shape targeting all subjects of `rdf:type` with a property restriction on an alternativePath list including all of the advanced OWL properties, and another similar shape with only the subsumption properties restricted to `sh:IRI` node kind (effectively forbidding use of blank nodes as values through those properties).
 
 **Non-Compliance Message(s):**
 
-*  Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used
+* Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used
 * Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used (bNodes in subsumption)
 
 **Non-Compliance Severity:** Violation
@@ -165,13 +179,15 @@ A node shape targeting all subjects of `rdf:type` with a property restriction on
 The choice in handling the lexicalisation of concepts shall be clearly defined and consistently implemented.
 |===
 
-*Primary Lexicalisation Properties Shape*
-
-A node shape targeting any subjects of `rdf:type` with restrictions of minCount=1 on the UNION of the properties {`rdfs:label`, `skos:prefLabel`} having a severity of WARNING
+=== *Primary Lexicalisation Properties Shape*
 
 **Checkable:** Yes
 
-**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_one_lexicalisation_opt.shacl.ttl[min_one_lexicalisation_opt.shacl.ttl]
+**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_one_lexicalisation_opt.shacl.ttl[min_one_lexicalisation_opt.shacl.ttl]
+
+**Shape Description**
+
+A node shape targeting any subjects of `rdf:type` with restrictions of minCount=1 on the UNION of the properties {`rdfs:label`, `skos:prefLabel`} having a severity of WARNING
 
 **Non-Compliance Message(s):**  Non-observance of SEMIC rule SC-R3: At least one lexicalisation label should exist
 
@@ -179,8 +195,7 @@ A node shape targeting any subjects of `rdf:type` with restrictions of minCount=
 
 **Desired State:** At least one of the two primary lexicalisation properties exist for any resource
 
-*Cardinality Constraints on Lexicalisation Literals Shape*
-
+=== *Cardinality Constraints on Lexicalisation Literals Shape*
 
 **Checkable:** Yes
 
@@ -210,7 +225,7 @@ No reasoning capabilities shall be assumed.
 
 **Checkable:** NO
 
-Informational rule, actionable by way of other rules (e.g. no advanced OWL features are to be used).
+**Why** Actionable by way of other rules (e.g. no advanced OWL features are to be used).
 
 [[sec:sc-r5]]
 == Circular definitions
@@ -229,34 +244,5 @@ The data specification (semantic, conceptual, or shape) shall not use circular d
 
 **Checkable:** NO
 
-Most examples in this rule describe situations that are already restricted by other rules according to the conventions, e.g. usage of domain and range is not allowed, neither are OWL axioms like owl:equivalentClass. Only actionable example could be that about rdfs:subClassOf, but not sure how to implement self-reference in a shape (maybe DASH has something).
+**Why** Most examples in this rule describe situations that are already restricted by other rules according to the conventions, e.g. usage of domain and range is not allowed, neither are OWL axioms like owl:equivalentClass. Only actionable example could be that about rdfs:subClassOf, but not sure how to implement self-reference in a shape (maybe DASH has something).
 
-TABLE HERE FOR:
-
-***Shape Description(s***
-Shapes File, Shape Description(s), Non-Compliance Message(s), Non-Compliance Severity, Desired State
-FEEL FREE TO REARRANGE AS YOU SEE FIT
-<EXAMPLE LINK TO A SHAPE ON GITHUB e.g. https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_ontology.shacl.ttl>
-
-**Non-Compliance Severity:** Violation
-
-**Desired State:** All lexicalisation literals have a cardinality of zero or one with or without a language tag
-
-
-==== Shape definition(s):
-
-**Shape Description(s)**
-
-
-**Checkable:** Yes
-
-**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl[only_owl_resources.shacl.ttl]
-
-
-
-**Non-Compliance Message(s):**
-
-
-**Non-Compliance Severity:** Violation
-
-**Desired State:**

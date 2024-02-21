@@ -1,0 +1,147 @@
+= Publication conventions
+
+[[sec:pc-r1]]
+== 5-star Linked Open Data
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* 5-star Linked Open Data
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* PC-R1
+
+|*Statement:*
+
+Publishing data specifications shall be compliant with 5-star LOD criteria.
+|===
+
+**Checkable:** No.
+
+**Why:** Not the domain of SHACL. While some parts of this rule may be implementable with some effort (like checking for dereferenceable IRIs, existing license), this is overall not actionable as SHACL shapes.
+
+[[sec:pc-r2]]
+== Persistent URI policy
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Persistent URI policy
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* PC-R2
+
+|*Statement:*
+
+The URIs that are used to identify the terms modelled in the data specifications should be _dereferenceable Persistent URIs_
+[xref:references.adoc#ref:10rules-puri[10rules-puri]] and comply with a URI policy (or URI strategy).
+
+URIs that are well-defined according to such criteria are often denoted as PURIs [xref:references.adoc#ref:10rules-puri[10rules-puri]].
+
+SEMIC adheres to the EU persistent URI policy. Each SEMIC URI is dereferenceable in both machine representation (RDF
+artefacts) and human-readable (HTML artefact).
+|===
+
+**Checkable:** No.
+
+**Why:** Not the domain of SHACL.
+
+
+[[sec:pc-r3]]
+== Version management
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Version management
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* PC-R3
+
+|*Statement:*
+
+A consistent version management shall be implemented for the data specification evolution respecting the "semantic versioning"
+principles.
+|===
+
+**Checkable:** Yes
+
+**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/semantic_versioning.shacl.ttl[semantic_versioning.shacl.ttl]
+
+**Shape Description:**
+
+A node shape targeting the class `owl:Class` with a property restriction on `owl:versionInfo` of exact cardinality 1, datatype string, and a value pattern matching verbatim the second of the official regular expression.
+
+**Non-Compliance Message(s):**
+
+* Violation of SEMIC rule PC-R3: The ontology shall be versioned following the SemVer specification.
+
+**Non-Compliance Severity:** Violation
+
+**Desired State:** Versioning information exists on any owl:Ontology instance matching a specific pattern compatible with SemVer.
+
+[[sec:pc-r4]]
+== Artefact versioning
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Artefact versioning
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* PC-R4
+
+|*Statement:*
+
+The data specification shall be versioned as a whole and never to atomic elements (concepts, relations
+or constraints).
+|===
+
+**Checkable:** Yes
+
+**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_atomic_versioning.shacl.ttl[no_atomic_versioning.shacl.ttl]
+
+**Shape Description:**
+
+Node shapes targeting classes of {owl:Class, owl:ObjectProperty, owl:DatatypeProperty} with restrictions of maxCount=0 on `owl:versionInfo` and `owl:versionIRI`.
+**Non-Compliance Message(s):**
+
+* Violation of SEMIC rule PC-R4: Never version on atomic elements
+
+**Non-Compliance Severity:** Violation
+
+**Desired State:** No owl versioning properties exist on any instance of {Class, DatatypeProperty, ObjectProperty}.
+
+[[sec:pc-r5]]
+== URI dereferencing
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* URI dereferencing
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* PC-R5
+
+|*Statement:*
+
+Any URI identifiable resource devised in a data specification shall be dereferenceable.
+|===
+**Checkable:** No.
+
+**Why:** Not the domain of SHACL.
+
+
+[[sec:pc-r6]]
+== Human-readable form
+
+|===
+|{set:cellbgcolor: #a8c6f7}
+ *Title:* Human-readable form
+
+|{set:cellbgcolor: #f5f8fc}
+*Identifier* PC-R6
+
+|*Statement:*
+
+Each data specification shall have a corresponding human-readable form representing the model documentation.
+|===
+
+**Checkable:** No.
+
+**Why:** Not the domain of SHACL.
