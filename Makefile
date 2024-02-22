@@ -41,6 +41,12 @@ list_rules_covered:
 	@ echo "$(BUILD_PRINT)List of rules covered by current shapes:"
 	@ grep -R "sh:message.*of SEMIC rule" shapes | sed -e 's/.*of SEMIC rule //' -e 's/:.*//' | sort -u
 
+start-service:
+	@ docker-compose --file docker-compose.yml up -d
+
+stop-service:
+	@ docker-compose --file docker-compose.yml down
+
 clean:
 	@ echo "$(BUILD_PRINT)Cleaning up output folder"
 	@ rm -fv output/$(SHAPES_FILE_OWL)
