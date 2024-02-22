@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Semantic conventions :: SEMIC Style Guide RDF Validator</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="..">
+            </a>
+        </div>
+    </nav>
+<nav class="navbar">
+    <div class="navbar-brand">
+    <img src="../_/img/semic-logo.png" class="logo" />
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs" >
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="dev">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">SEMIC Style Guide RDF Validator</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="semantic-conventions.html">Semantic Conventions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="data-shape-conventions.html">Data Shape Conventions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="publication-conventions.html">Publication Conventions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="conceptual-model-conventions.html">Conceptual Model Conventions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">SEMIC Style Guide RDF Validator</span>
+    <span class="version">dev</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">SEMIC Style Guide RDF Validator</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">dev</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SEMIC Style Guide RDF Validator</a></li>
+    <li><a href="semantic-conventions.html">Semantic Conventions</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/edit/shacl-docs/docs/modules/ROOT/pages/semantic-conventions.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Semantic conventions</h1>
+<div class="sect1">
+<h2 id="sec:sc-r1"><a class="anchor" href="#sec:sc-r1"></a>Formal language choice</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Formal language choice</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r1">SC-R1</a>
+.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">The formal ontology shall be expressed in OWL 2.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_ontology.shacl.ttl">only_owl_ontology.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A node shape targeting a dummy focus node with a custom SPARQL query that checks if there does NOT exist a statement with <code>rdf:type</code> (not mandated but good to have as this is always an implied assumption)</p>
+</li>
+<li>
+<p>A node shape targeting the focus node <code>owl:Ontology</code> with a restriction of minCount=1 and maxCount=1 on the inverse of the path <code>rdf:type</code> (there must exist exactly one instance of the target node)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Violation of standard practice: Missing explicit type declaration</p>
+</li>
+<li>
+<p>Violation of SEMIC rule SC-R1: Missing OWL ontology declaration</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> There exists a named instance of the ontology (owl:Ontology statement)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:sc-r2"><a class="anchor" href="#sec:sc-r2"></a>Limited (OWL 2) expressivity</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Limited (OWL 2) expressivity</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r2">SC-R2</a>
+.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">The formal ontology shall be lightweight in its logical underpinning, focusing mainly on the concept declarations, generalisation axioms and annotations.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_no_rdfsdomain_or_rdfsrange_declarations"><a class="anchor" href="#_no_rdfsdomain_or_rdfsrange_declarations"></a><strong>No rdfs:domain or rdfs:range Declarations</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_domain_range_opt.shacl.ttl">no_domain_range_opt.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting any subject of <code>rdf:type</code> with restrictions of maxCount=0 on the properties <code>rdfs:domain</code> and <code>rdfs:range</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>V Non-observance of SEMIC rule SC-R2: No expressions of property domain shall be used</p>
+</li>
+<li>
+<p>Non-observance of SEMIC rule SC-R2: No expressions of property range shall be used</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> No rdfs:domain or rdfs:range declaration exists on any resource</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_only_owl_resources_exist"><a class="anchor" href="#_only_owl_resources_exist"></a><strong>Only OWL Resources Exist</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl">only_owl_resources.shacl.ttl
+</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting any subjects of <code>rdf:type</code> with a restriction on the property <code>rdf:type</code> having values only from the set {owl:Ontology, owl:Class, owl:DatatypeProperty, owl:ObjectProperty, owl:AnnotationProperty}</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Violation of SEMIC rule SC-R2: Only limited OWL class and property declarations shall be used</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> Only OWL resources (instances declared to be one of the primary OWL types) exist</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_only_rdfssubclassof_and_rdfssubpropertyof"><a class="anchor" href="#_using_only_rdfssubclassof_and_rdfssubpropertyof"></a><strong>Using only  rdfs:subClassOf and rdfs:subPropertyOf</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl">only_owl_resources.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Violation of SEMIC rule SC-R2: Only subsumption OWL class relations shall be used</p>
+</li>
+<li>
+<p>Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> Only rdfs:subClassOf are used between classes and rdfs:subPropertyOf between properties</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_limited_expressions_to_select_properties"><a class="anchor" href="#_limited_expressions_to_select_properties"></a><strong>Limited Expressions to Select Properties</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/select_few_expressions.shacl.ttl">select_few_expressions.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description</strong></p>
+</div>
+<div class="paragraph">
+<p>A <em>closed</em> node shape (ignoring certain properties) targeting the class <code>sh:NodeShape</code> with several property shapes representing the limited set, with only the property path declared for each.</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Non-observance of SEMIC rule SC-R2: The ontology shall be limited to a select few expressions</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Info</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> Expressions are limited to a select few properties</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_minimum_set_of_ontology_header_properties"><a class="anchor" href="#_minimum_set_of_ontology_header_properties"></a><strong>Minimum Set of Ontology Header Properties</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_ontology_header.shacl.ttl">min_ontology_header.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting the class <code>owl:Ontology</code> with a property restriction for each property from a predetermined set (combining what&#8217;s mentioned in the conventions and what&#8217;s used in ePO) and minCount=1, and corresponding datatype restrictions (<code>rdf:langString</code> for those expected to be language-tagged, <code>xsd:date</code> for dates, <code>sh:IRI</code> for IRIs and <code>xsd:string</code> otherwise.</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong>
+Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header ({?property} &lt;{?type}&gt;)</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> A minimum set of ontology header properties exist</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_no_advanced_owl_construct_exists"><a class="anchor" href="#_no_advanced_owl_construct_exists"></a><strong>No advanced OWL construct exists</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_advanced_definitions.shacl.ttl">no_advanced_definitions.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting all subjects of <code>rdf:type</code> with a property restriction on an alternativePath list including all of the advanced OWL properties, and another similar shape with only the subsumption properties restricted to <code>sh:IRI</code> node kind (effectively forbidding use of blank nodes as values through those properties).</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used</p>
+</li>
+<li>
+<p>Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used (bNodes in subsumption)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> No advanced OWL construct exists</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:sc-r3"><a class="anchor" href="#sec:sc-r3"></a>Lexicalisation</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Lexicalisation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r3">SC-R3</a>
+.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">The choice in handling the lexicalisation of concepts shall be clearly defined and consistently implemented.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_primary_lexicalisation_properties"><a class="anchor" href="#_primary_lexicalisation_properties"></a><strong>Primary Lexicalisation Properties</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_one_lexicalisation_opt.shacl.ttl">min_one_lexicalisation_opt.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting any subjects of <code>rdf:type</code> with restrictions of minCount=1 on the UNION of the properties {<code>rdfs:label</code>, <code>skos:prefLabel</code>} having a severity of WARNING</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong>  Non-observance of SEMIC rule SC-R3: At least one lexicalisation label should exist</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> At least one of the two primary lexicalisation properties exist for any resource</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cardinality_constraints_on_lexicalisation_literals"><a class="anchor" href="#_cardinality_constraints_on_lexicalisation_literals"></a><strong>Cardinality Constraints on Lexicalisation Literals</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/max_one_label.shacl.ttl">max_one_label.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Violation of standard practice: More than one <code>skos:prefLabel</code> exists without a language tag</p>
+</li>
+<li>
+<p>Language {lang} has been used by {n} values (default SHACL message)</p>
+</li>
+<li>
+<p>Language {?lang} used more than once (default SHACL message)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Violation.</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> All lexicalisation literals have a cardinality of zero or one with or without a language tag</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:sc-r4"><a class="anchor" href="#sec:sc-r4"></a>Reasoning assumption</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Reasoning assumption</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r4">SC-R4</a>
+.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">No reasoning capabilities shall be assumed.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Checkable:</strong> NO</p>
+</div>
+<div class="paragraph">
+<p><strong>Why:</strong> Actionable by way of other rules (e.g. no advanced OWL features are to be used).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:sc-r5"><a class="anchor" href="#sec:sc-r5"></a>Circular definitions</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Circular definitions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r5">SC-R5</a>
+.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">The data specification (semantic, conceptual, or shape) shall not use circular definitions.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Checkable:</strong> NO</p>
+</div>
+<div class="paragraph">
+<p><strong>Why:</strong> Most examples in this rule describe situations that are already restricted by other rules according to the conventions, e.g. usage of domain and range is not allowed, neither are OWL axioms like owl:equivalentClass. Only actionable example could be that about rdfs:subClassOf, but not sure how to implement self-reference in a shape (maybe DASH has something).</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <p style="text-align:center">This document is created by the European Commission and is licensed under the terms of
+        EUPL-1.2 license</a>.
+        <br/>This page was built using the Antora default UI. The source code for this UI is licensed under the terms of
+        the MPL-2.0 license.
+    </p>
+
+        <script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="150" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="150" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+  </body>
+</html>

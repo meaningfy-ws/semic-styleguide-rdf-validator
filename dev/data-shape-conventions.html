@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Data shape conventions :: SEMIC Style Guide RDF Validator</title>
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="..">
+            </a>
+        </div>
+    </nav>
+<nav class="navbar">
+    <div class="navbar-brand">
+    <img src="../_/img/semic-logo.png" class="logo" />
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs" >
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="dev">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">SEMIC Style Guide RDF Validator</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="semantic-conventions.html">Semantic Conventions</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="data-shape-conventions.html">Data Shape Conventions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="publication-conventions.html">Publication Conventions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="conceptual-model-conventions.html">Conceptual Model Conventions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">SEMIC Style Guide RDF Validator</span>
+    <span class="version">dev</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">SEMIC Style Guide RDF Validator</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">dev</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">SEMIC Style Guide RDF Validator</a></li>
+    <li><a href="data-shape-conventions.html">Data Shape Conventions</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/edit/shacl-docs/docs/modules/ROOT/pages/data-shape-conventions.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Data shape conventions</h1>
+<div class="sect1">
+<h2 id="sec:dss-r1"><a class="anchor" href="#sec:dss-r1"></a>Data shape language choice</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Data shape language choice</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r1">DSC-R1</a>
+.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">The data shapes shall be expressed in SHACL.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl">shape_declarations_exist.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A node shape targeting all subjects of <code>rdf:type</code> with a property membership restriction to both the set of primary OWL and SHACL types</p>
+</li>
+<li>
+<p>A node shape targeting the class <code>sh:NodeShape</code> with a restriction on the inverse of the propery <code>rdf:type</code> and minCount=1 (effectively saying there must be at least one instance of it)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Violation of SEMIC rule DSC-R1: Only SHACL (and OWL) class and property declarations shall be used</p>
+</li>
+<li>
+<p>Violation of SEMIC rule DSC-R1: SHACL shape declarations shall exist</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> Only SHACL resources (instances declared to be one of the SHACL types and additionally also OWL) exist.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:dsc-r2"><a class="anchor" href="#sec:dsc-r2"></a>Loose versus rigid constraints</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Loose versus rigid constraints</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Identifier</strong> <a href="https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r2">DSC-R2</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">In a Core Vocabulary, then the data shape constraints shall be as loose as possible, i.e., permissive, while in an Application Profile, the data shape constraints shall be as rigid as necessary, i.e. restrictive.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Checkable:</strong> No.</p>
+</div>
+<div class="paragraph">
+<p><strong>Why:</strong> It is not possible to verify whether a vocabulary is a component of an application profile. To implement such a check, options need to be provided, such as specifying an application profile for validation. Nevertheless, identifying violations in shapes that adhere or deviate from the application profile will pose a challenge.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:dsc-r3"><a class="anchor" href="#sec:dsc-r3"></a>Open and Closed world assumptions</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Open and Closed world assumptions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Identifier</strong> <a href="https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r3">DSC-R3</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">The data instantiating a core model may be fragmented across information systems. For representation purposes, open-world
+assumptions shall be adopted, and for validation purposes, a closed-world assumption shall be adopted.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Checkable:</strong> No.</p>
+</div>
+<div class="paragraph">
+<p><strong>Why:</strong> The open vs. closed world assumption is not easily verified in an automated manner. The conventions do not clearly articulate how this affects large ontologies, such as ePO.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:dsc-r4"><a class="anchor" href="#sec:dsc-r4"></a>Shape definitions</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Shape definitions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Identifier</strong> <a href="https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r4">DSC-R4</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">Each ontology class shall be mirrored by a <code>sh:NodeShape</code>. The property constraints may be embedded (contextualised) within node shapes or defined as freestanding.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl">avoid_class_extension.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting the class <code>sh:NodeShape</code> with a property value type membership restriction to <code>sh:NodeShape</code> (effectively saying this is by no means an extended shape of any kind - not just OWL class)</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Non-observance of SEMIC rule DSC-R4: Avoid classes extended as node shapes.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> A NodeShape is not declared to be of any other type.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec:dsc-r5"><a class="anchor" href="#sec:dsc-r5"></a>Data shape severity</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #a8c6f7;"><p class="tableblock"> <strong>Title:</strong> Data shape severity</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Identifier</strong> <a href="https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r5">DSC-R5</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
+<p class="tableblock">It is recommended to use constraint severity for distinguishing critical violations from non-critical recommendation warnings and from nice-to-have information.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
+<div class="paragraph">
+<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/severity_declaration_exists.shacl.ttl">severity_declaration_exists.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape is targeting at the class sh:NodeShape and includes a restriction of XONE (exactly or 'exclusively one of') on two sets of property shapes. The first set relates to the property sh:severity with an exact cardinality of 1. The second set relates to the sequence of properties (sh:property sh:severity) with an exact cardinality of 1, referring to any associated property shape. Essentially, this specification implies that either of these situations must exist.</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Non-observation of SEMIC rule DSC-R5: Data shapes should be assigned a level of severity.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> A NodeShape is not declared to be of any other type.</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+    <p style="text-align:center">This document is created by the European Commission and is licensed under the terms of
+        EUPL-1.2 license</a>.
+        <br/>This page was built using the Antora default UI. The source code for this UI is licensed under the terms of
+        the MPL-2.0 license.
+    </p>
+
+        <script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="150" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="150" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+  </body>
+</html>
