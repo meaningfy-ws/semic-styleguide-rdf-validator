@@ -14,7 +14,7 @@ antora:
 content:
   sources:
   - url: https://github.com/meaningfy-ws/semic-styleguide-rdf-validator
-    branches: [ main, shacl-docs ]
+    branches: [ shacl-docs ]
     start_path: docs
 
 ui:
