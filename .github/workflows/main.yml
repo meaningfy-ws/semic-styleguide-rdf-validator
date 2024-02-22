@@ -3,7 +3,7 @@
 name: Build
 on:
   push:
-    branches: [ master, main, docs, shacl-docs ]
+    branches: [ main, docs ]
 env:
   SITE_DIR: 'site'
 jobs:
