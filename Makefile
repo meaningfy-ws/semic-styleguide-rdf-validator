@@ -47,6 +47,29 @@ start-service:
 stop-service:
 	@ docker-compose --file docker-compose.yml down
 
+#-- ANTORA SECTION adapted from https://github.com/SEMICeu/style-guide/blob/main/Makefile --
+SHELL=/bin/bash -o pipefail
+
+# currently not required as we don't expect anyone to build locally
+# install-node:
+# 	@ echo -e "$(BUILD_PRINT)Installing NodeJS"
+# 	@ sudo apt install npm
+# 	@ mkdir -p ~/.npm
+# 	@ npm config set prefix ~/.npm
+# 	@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# 	@ nvm list-remote
+# 	@ nvm install lts/gallium
+# 	@ source ~/.bashrc
+
+install-antora:
+	@ echo -e "$(BUILD_PRINT)Installing Antora"
+	@ npm install
+
+build-site:
+	@ echo -e "$(BUILD_PRINT)Build site$(END_BUILD_PRINT)"
+	@ npx antora --fetch antora-playbook.yml
+#-- END ANTORA SECTION --
+
 clean:
 	@ echo "$(BUILD_PRINT)Cleaning up output folder"
 	@ rm -fv output/$(SHAPES_FILE_OWL)

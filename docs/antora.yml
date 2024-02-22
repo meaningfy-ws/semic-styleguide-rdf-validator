@@ -1,0 +1,19 @@
+# adapted from:
+# - https://github.com/SEMICeu/style-guide/blob/main/docs/antora.yml
+# - https://github.com/meaningfy-ws/model2owl-docs/blob/main/docs/antora.yml
+name: ROOT
+version: dev
+title: SEMIC Style Guide RDF Validator
+start_page: ROOT:index.adoc
+# asciidoc:
+#   attributes:
+#     imagesdir: images
+#     xrefstyle: short@
+#     example-caption: Rule@
+#     example-refsig: Rulota
+#     listing-caption: Listing@
+#     listing-refsig: Listing
+#     table-refsig: Tabella
+#     counter: rule-cnt@
+nav:
+  - modules/ROOT/nav.adoc
