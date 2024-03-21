@@ -83,7 +83,7 @@
     <li><a href="semantic-conventions.html">Semantic Conventions</a></li>
   </ul>
 </nav>
-<div class="edit-this-page"><a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/edit/feature/SM15-116/docs/docs/modules/ROOT/pages/semantic-conventions.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/edit/main/docs/modules/ROOT/pages/semantic-conventions.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -104,7 +104,8 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
-<strong>Identifier</strong> <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r1">SC-R1</a></p></td>
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r1">SC-R1</a>
+.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
@@ -113,66 +114,42 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> Yes, partially</p>
+<p><strong>Checkable:</strong> Yes</p>
 </div>
 <div class="paragraph">
-<p>There is no specific signature of an OWL ontology other than its resources. At a fundamental level, if there is no ontology declaration, it can be an RDF-S ontology. For this assumption to hold true, it is expected that all resources have a type declaration. Any other aspect of the validity of an OWL ontology falls within the domain of its syntax, which is beyond the scope of the conventions.</p>
+<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_ontology.shacl.ttl">only_owl_ontology.shacl.ttl</a></p>
 </div>
 <div class="paragraph">
-<p><a href="#sc-r2">SC-R2</a> has overlap.</p>
-</div>
-<div class="sect2">
-<h3 id="_named_instance_of_the_ontology"><a class="anchor" href="#_named_instance_of_the_ontology"></a>Named instance of the ontology</h3>
-<div class="paragraph">
-<p><strong>Shapes File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_ontology.shacl.ttl">only_owl_ontology.shacl.ttl</a></p>
-</div>
-<div class="paragraph">
-<p><strong>Shape Description(s):</strong></p>
+<p><strong>Shape Description:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A node shape targeting a dummy <em>focus node</em> with a custom SPARQL query that checks if there does <em>not</em> exist a statement with <code>rdf:type</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Non-Compliance Severity:</strong> Violation</p>
+<p>A node shape targeting a dummy focus node with a custom SPARQL query that checks if there does NOT exist a statement with <code>rdf:type</code> (not mandated but good to have as this is always an implied assumption)</p>
 </li>
 <li>
+<p>A node shape targeting the focus node <code>owl:Ontology</code> with a restriction of minCount=1 and maxCount=1 on the inverse of the path <code>rdf:type</code> (there must exist exactly one instance of the target node)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Message(s):</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Violation of standard practice: Missing explicit type declaration</code></p>
+<p>Violation of standard practice: Missing explicit type declaration</p>
+</li>
+<li>
+<p>Violation of SEMIC rule SC-R1: Missing OWL ontology declaration</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>A node shape targeting the <em>focus node</em> <code>owl:Ontology</code> with a restriction of <code>minCount=1</code> and <code>maxCount=1</code> on the inverse of the <em>path</em> <code>rdf:type</code> (i.e. there must exist exactly one instance of the ontology).</p>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p><strong>Non-Compliance Severity:</strong> Violation</p>
-</li>
-<li>
-<p><strong>Non-Compliance Message(s):</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Violation of SEMIC rule SC-R1: Missing OWL ontology declaration</code></p>
-</li>
-</ul>
 </div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> There exists a named instance of the ontology (owl:Ontology statement)</p>
 </div>
 </div>
 </div>
@@ -189,7 +166,8 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
-<strong>Identifier</strong> <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r2">SC-R2</a></p></td>
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r2">SC-R2</a>
+.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
@@ -197,217 +175,191 @@
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p><strong>Checkable:</strong> Yes, partially, with multiple derived subrules for best practices</p>
-</div>
 <div class="sect2">
-<h3 id="_no_domain_or_range_declarations"><a class="anchor" href="#_no_domain_or_range_declarations"></a>No domain or range declarations</h3>
+<h3 id="_no_rdfsdomain_or_rdfsrange_declarations"><a class="anchor" href="#_no_rdfsdomain_or_rdfsrange_declarations"></a><strong>No rdfs:domain or rdfs:range Declarations</strong></h3>
 <div class="paragraph">
-<p><strong>Shape File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_domain_range_opt.shacl.ttl">no_domain_range_opt.shacl.ttl</a></p>
+<p><strong>Checkable:</strong> Yes</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description(s):</strong></p>
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_domain_range_opt.shacl.ttl">no_domain_range_opt.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting any subject of <code>rdf:type</code> with restrictions of maxCount=0 on the properties <code>rdfs:domain</code> and <code>rdfs:range</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A node shape targeting any subject of <code>rdf:type</code> with restrictions of <code>maxCount=0</code> on the properties <code>rdfs:domain</code> and <code>rdfs:range</code>.</p>
-<div class="ulist">
-<ul>
+<p>V Non-observance of SEMIC rule SC-R2: No expressions of property domain shall be used</p>
+</li>
 <li>
+<p>Non-observance of SEMIC rule SC-R2: No expressions of property range shall be used</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Severity:</strong> Warning</p>
-</li>
-<li>
-<p><strong>Non-Compliance Message(s):</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Non-observance of SEMIC rule SC-R2: No expressions of property domain shall be used</code></p>
-</li>
-<li>
-<p><code>Non-observance of SEMIC rule SC-R2: No expressions of property range shall be used</code></p>
-</li>
-</ul>
 </div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Desired State:</strong> No rdfs:domain or rdfs:range declaration exists on any resource</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_limited_owl_resource_types"><a class="anchor" href="#_limited_owl_resource_types"></a>Limited OWL resource types</h3>
+<h3 id="_only_owl_resources_exist"><a class="anchor" href="#_only_owl_resources_exist"></a><strong>Only OWL Resources Exist</strong></h3>
 <div class="paragraph">
-<p><strong>Shapes File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl">only_owl_resources.shacl.ttl</a></p>
+<p><strong>Checkable:</strong> Yes</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description(s):</strong></p>
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl">only_owl_resources.shacl.ttl
+</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting any subjects of <code>rdf:type</code> with a restriction on the property <code>rdf:type</code> having values only from the set {owl:Ontology, owl:Class, owl:DatatypeProperty, owl:ObjectProperty, owl:AnnotationProperty}</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A node shape targeting any subjects of <code>rdf:type</code> with a restriction on the property <code>rdf:type</code> having values only from the set <code>{owl:Ontology, owl:Class, owl:DatatypeProperty, owl:ObjectProperty, owl:AnnotationProperty}</code>.</p>
-<div class="ulist">
-<ul>
-<li>
+<p>Violation of SEMIC rule SC-R2: Only limited OWL class and property declarations shall be used</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Severity:</strong> Violation</p>
-</li>
-<li>
-<p><strong>Non-Compliance Message(s):</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Violation of SEMIC rule SC-R2: Only limited OWL class and property declarations shall be used</code></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
 </div>
 <div class="paragraph">
-<p>Overlaps with <a href="#sc-r1">SC-R1</a>.</p>
+<p><strong>Desired State:</strong> Only OWL resources (instances declared to be one of the primary OWL types) exist</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_only_owl_subsumption_relationships_between_resources"><a class="anchor" href="#_only_owl_subsumption_relationships_between_resources"></a>Only OWL subsumption relationships between resources</h3>
+<h3 id="_using_only_rdfssubclassof_and_rdfssubpropertyof"><a class="anchor" href="#_using_only_rdfssubclassof_and_rdfssubpropertyof"></a><strong>Using only  rdfs:subClassOf and rdfs:subPropertyOf</strong></h3>
 <div class="paragraph">
-<p><strong>Shapes File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl">only_owl_resources.shacl.ttl</a></p>
+<p><strong>Checkable:</strong> Yes</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description(s):</strong></p>
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/only_owl_resources.shacl.ttl">only_owl_resources.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Node shapes targeting classes from the set <code>{owl:Class, owl:ObjectProperty, owl:DatatypeProperty}</code> with a custom SPARQL query that checks if there exists <em>any</em> property between two resources (the target and an IRI) that is <em>not</em> one of the set <code>{rdf:type, rdfs:subClassOf, rdfs:subPropertyOf}</code>.</p>
-<div class="ulist">
-<ul>
+<p>Violation of SEMIC rule SC-R2: Only subsumption OWL class relations shall be used</p>
+</li>
 <li>
+<p>Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Severity:</strong> Violation</p>
-</li>
-<li>
-<p><strong>Non-Compliance Message(s):</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Violation of SEMIC rule SC-R2: Only subsumption OWL class relations shall be used</code></p>
-</li>
-<li>
-<p><code>Violation of SEMIC rule SC-R2: Only subsumption OWL property relations shall be used</code></p>
-</li>
-</ul>
 </div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Desired State:</strong> Only rdfs:subClassOf are used between classes and rdfs:subPropertyOf between properties</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_limit_expressions_to_a_select_few_properties"><a class="anchor" href="#_limit_expressions_to_a_select_few_properties"></a>Limit expressions to a select few properties</h3>
+<h3 id="_limited_expressions_to_select_properties"><a class="anchor" href="#_limited_expressions_to_select_properties"></a><strong>Limited Expressions to Select Properties</strong></h3>
 <div class="paragraph">
-<p><strong>Shape File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/select_few_expressions.shacl.ttl">select_few_expressions.shacl.ttl</a></p>
+<p><strong>Checkable:</strong> Yes</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description(s):</strong></p>
+<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/select_few_expressions.shacl.ttl">select_few_expressions.shacl.ttl</a></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>A <em>closed</em> node shape (ignoring basic properties which are the subject of other rules/shapes) targeting the class <code>sh:NodeShape</code> with several property shapes representing a limited recommended set, with only the property <em>path</em> declared for each.</p>
-</li>
-<li>
-<p><strong>*Non-Compliance Severity:</strong> Info</p>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
+<p><strong>Shape Description</strong></p>
+</div>
+<div class="paragraph">
+<p>A <em>closed</em> node shape (ignoring certain properties) targeting the class <code>sh:NodeShape</code> with several property shapes representing the limited set, with only the property path declared for each.</p>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Message(s):</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Non-observance of SEMIC rule SC-R2: The ontology shall be limited to a select few expressions</code></p>
+<p>Non-observance of SEMIC rule SC-R2: The ontology shall be limited to a select few expressions</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Info</p>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Desired State:</strong> Expressions are limited to a select few properties</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_minimum_ontology_header"><a class="anchor" href="#_minimum_ontology_header"></a>Minimum ontology header</h3>
+<h3 id="_minimum_set_of_ontology_header_properties"><a class="anchor" href="#_minimum_set_of_ontology_header_properties"></a><strong>Minimum Set of Ontology Header Properties</strong></h3>
 <div class="paragraph">
-<p><strong>*Shape File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_ontology_header.shacl.ttl">min_ontology_header.shacl.ttl</a></p>
+<p><strong>Checkable:</strong> Yes</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description(s):</strong></p>
+<p><strong>Shape File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_ontology_header.shacl.ttl">min_ontology_header.shacl.ttl</a></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>A node shape targeting the class <code>owl:Ontology</code> with a property restriction of <code>minCount=1</code> for each property from a limited recommended set (combining the list from the conventions and those used in a reference ontology <a href="https://github.com/OP-TED/ePO">ePO</a>), and corresponding datatype restrictions (<code>rdf:langString</code> for those expected to be language-tagged, <code>xsd:date</code> for dates, <code>sh:IRI</code> for IRIs and <code>xsd:string</code> otherwise).</p>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
+<p><strong>Shape Description:</strong></p>
+</div>
+<div class="paragraph">
+<p>A node shape targeting the class <code>owl:Ontology</code> with a property restriction for each property from a predetermined set (combining what&#8217;s mentioned in the conventions and what&#8217;s used in ePO) and minCount=1, and corresponding datatype restrictions (<code>rdf:langString</code> for those expected to be language-tagged, <code>xsd:date</code> for dates, <code>sh:IRI</code> for IRIs and <code>xsd:string</code> otherwise.</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong>
+Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header ({?property} &lt;{?type}&gt;)</p>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Severity:</strong> Warning</p>
-</li>
-<li>
-<p><strong>Non-Compliance Message(s):</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Non-observance of SEMIC rule SC-R2: The ontology shall include a minimum header ({?property} &lt;{?type}&gt;)</code></p>
-</li>
-</ul>
 </div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Desired State:</strong> A minimum set of ontology header properties exist</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_no_advanced_owl_constructs"><a class="anchor" href="#_no_advanced_owl_constructs"></a>No advanced OWL constructs</h3>
+<h3 id="_no_advanced_owl_construct_exists"><a class="anchor" href="#_no_advanced_owl_construct_exists"></a><strong>No advanced OWL construct exists</strong></h3>
+<div class="paragraph">
+<p><strong>Checkable:</strong> Yes</p>
+</div>
 <div class="paragraph">
 <p><strong>Shape File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_advanced_definitions.shacl.ttl">no_advanced_definitions.shacl.ttl</a></p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description(s):</strong></p>
+<p><strong>Shape Description:</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>A node shape targeting all subjects of <code>rdf:type</code> with a property restriction on an <code>alternativePath</code> list that includes a set of advanced OWL properties, and another similar shape with only the subsumption properties restricted to <code>sh:IRI</code> <em>node kind</em> (effectively forbidding use of blank nodes as values through those properties).</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Non-Compliance Severity:</strong> Violation</p>
-</li>
-<li>
+<div class="paragraph">
+<p>A node shape targeting all subjects of <code>rdf:type</code> with a property restriction on an alternativePath list including all of the advanced OWL properties, and another similar shape with only the subsumption properties restricted to <code>sh:IRI</code> node kind (effectively forbidding use of blank nodes as values through those properties).</p>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Message(s):</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used</code></p>
+<p>Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used</p>
 </li>
 <li>
-<p><code>Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used (bNodes in subsumption)</code></p>
+<p>Violation of SEMIC rule SC-R2: Advanced logical definitions shall not be used (bNodes in subsumption)</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Desired State:</strong> No advanced OWL construct exists</p>
 </div>
 </div>
 </div>
@@ -425,7 +377,8 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
-<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r3">SC-R3</a></p></td>
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r3">SC-R3</a>
+.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
@@ -433,69 +386,59 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="_primary_lexicalisation_properties"><a class="anchor" href="#_primary_lexicalisation_properties"></a><strong>Primary Lexicalisation Properties</strong></h3>
 <div class="paragraph">
 <p><strong>Checkable:</strong> Yes</p>
 </div>
-<div class="sect2">
-<h3 id="_at_least_one_of_two_primary_lexicalisations"><a class="anchor" href="#_at_least_one_of_two_primary_lexicalisations"></a>At least one of two primary lexicalisations</h3>
 <div class="paragraph">
 <p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/min_one_lexicalisation_opt.shacl.ttl">min_one_lexicalisation_opt.shacl.ttl</a></p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description(s):</strong></p>
+<p><strong>Shape Description</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>A node shape targeting any subjects of <code>rdf:type</code> with restrictions of <code>minCount=1</code> on the UNION of the properties from the set <code>{rdfs:label, skos:prefLabel}</code>.</p>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
+<p>A node shape targeting any subjects of <code>rdf:type</code> with restrictions of minCount=1 on the UNION of the properties {<code>rdfs:label</code>, <code>skos:prefLabel</code>} having a severity of WARNING</p>
+</div>
+<div class="paragraph">
+<p><strong>Non-Compliance Message(s):</strong>  Non-observance of SEMIC rule SC-R3: At least one lexicalisation label should exist</p>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Severity:</strong> Warning</p>
-</li>
-<li>
-<p><strong>Non-Compliance Message(s):</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Non-observance of SEMIC rule SC-R3: At least one lexicalisation label should exist</code></p>
-</li>
-</ul>
 </div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Desired State:</strong> At least one of the two primary lexicalisation properties exist for any resource</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_at_most_one_value_per_lexicalisation"><a class="anchor" href="#_at_most_one_value_per_lexicalisation"></a>At most one value per lexicalisation</h3>
+<h3 id="_cardinality_constraints_on_lexicalisation_literals"><a class="anchor" href="#_cardinality_constraints_on_lexicalisation_literals"></a><strong>Cardinality Constraints on Lexicalisation Literals</strong></h3>
 <div class="paragraph">
-<p><strong>Shape File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/max_one_label.shacl.ttl">max_one_label.shacl.ttl</a></p>
+<p><strong>Checkable:</strong> Yes</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Non-Compliance Severity:</strong> Violation</p>
-</li>
-<li>
+<div class="paragraph">
+<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/max_one_label.shacl.ttl">max_one_label.shacl.ttl</a></p>
+</div>
+<div class="paragraph">
 <p><strong>Non-Compliance Message(s):</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Violation of standard practice: More than one `skos:prefLabel</code> exists without a language tag`</p>
+<p>Violation of standard practice: More than one <code>skos:prefLabel</code> exists without a language tag</p>
 </li>
 <li>
-<p><code>Language {lang} has been used by {n} values</code> (default SHACL message)</p>
+<p>Language {lang} has been used by {n} values (default SHACL message)</p>
 </li>
 <li>
-<p><code>Language {?lang} used more than once</code> (default SHACL message)</p>
+<p>Language {?lang} used more than once (default SHACL message)</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Non-Compliance Severity:</strong> Violation.</p>
+</div>
+<div class="paragraph">
+<p><strong>Desired State:</strong> All lexicalisation literals have a cardinality of zero or one with or without a language tag</p>
 </div>
 </div>
 </div>
@@ -513,7 +456,8 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
-<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r4">SC-R4</a></p></td>
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r4">SC-R4</a>
+.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
@@ -522,10 +466,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> No</p>
+<p><strong>Checkable:</strong> NO</p>
 </div>
 <div class="paragraph">
-<p>Informational rule, actionable by way of other rules (e.g. <a href="#sec-2">SC-R2</a> <strong>No advanced OWL constructs</strong>).</p>
+<p><strong>Why:</strong> Actionable by way of other rules (e.g. no advanced OWL features are to be used).</p>
 </div>
 </div>
 </div>
@@ -542,7 +486,8 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
-<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r5">SC-R5</a></p></td>
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-semantic-conventions.html#sec:sc-r5">SC-R5</a>
+.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
@@ -551,10 +496,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> No</p>
+<p><strong>Checkable:</strong> NO</p>
 </div>
 <div class="paragraph">
-<p>A self-reference is not easy to check for without the use of custom SPARQL queries (that can inflate validation time) or resorting to non-standard approaches (e.g. <a href="https://datashapes.org/constraints.html#NonRecursiveConstraintComponent">dash:nonRecursive</a>). Deferred for implementation in a later revision.</p>
+<p><strong>Why:</strong> Most examples in this rule describe situations that are already restricted by other rules according to the conventions, e.g. usage of domain and range is not allowed, neither are OWL axioms like owl:equivalentClass. Only actionable example could be that about rdfs:subClassOf, but not sure how to implement self-reference in a shape (maybe DASH has something).</p>
 </div>
 </div>
 </div>
