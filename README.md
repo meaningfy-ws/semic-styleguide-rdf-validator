@@ -27,7 +27,7 @@ For each guideline in the style guide, a set of rules have been implemented,
 which assess whether an OWL or SHACL convention is respected. These rules
 specify constraints on the structure, relationships, and properties within the
 models. The set of rules employed during validation is documented
-[here](https://docs.google.com/spreadsheets/d/12ZiwN6WXUNoujSWdnAbDd4asaT0IlQvlxkfm5VnItko/edit?usp=sharing).
+[here](https://meaningfy-ws.github.io/semic-styleguide-rdf-validator/).
 
 The content to validate can be provided as a **file** or a **URI reference**.
 Documentation on using the Interoperability Test Bed (ITB) is available
