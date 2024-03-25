@@ -112,10 +112,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> NO</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> it is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -140,10 +140,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> NO</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> it is Informative rule; mapping between model elements.</p>
+<p>Informative rule on mapping between model elements.</p>
 </div>
 </div>
 </div>
@@ -168,10 +168,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> NO</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong>  it is currently unimplementable due to the complex regex required and an error with (py)SHACL-SPARQL, as reported on <a href="https://discord.com/channels/911006583067144212/911020976496586782/1204449907226845194">Discord</a>.</p>
+<p>Has overlap with <a href="https://semiceu.github.io/style-guide/1.0.0/gc-conceptual-model-conventions.html#sec:cmc-r4">CMC-R4</a> in that only uppercase or lowercase resource names are allowed (PascalCase and camelCase). However, currently unimplementable due to the complex regular expression(s) required and an error with certain SHACL-SPARQL implementations, as reported on <a href="https://discord.com/channels/911006583067144212/911020976496586782/1204449907226845194">Discord</a>.</p>
 </div>
 </div>
 </div>
@@ -196,10 +196,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> NO</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Enforcing CamelCase with a regex match is challenging and may prove difficult to implement directly and correctly, making it susceptible to brittleness. Instead, our approach should involve an indirect check to ensure that no other characters are used for separation. Specifically, we can verify that classes start with a capital letter, and properties start with a lowercase letter. Although there is an overlap with CMC-R3, which specifies PascalCase for classes and camelCase for properties, the current implementation is hindered by the complexity of the required regex and an error with (py)SHACL-SPARQL, as reported on  <a href="https://discord.com/channels/911006583067144212/911020976496586782/1204449907226845194">Discord</a>.</p>
+<p>Has overlap with <a href="https://semiceu.github.io/style-guide/1.0.0/gc-conceptual-model-conventions.html#sec:cmc-r3">CMC-R3</a>. Enforcing CamelCase with a <em>regex</em> match is hard and may not be able to be implemented directly/correctly and prone to be brittle. Rather, we have to indirectly check if no other characters are used for separation. We can of course check if classes start with an uppercase and properties lowercase. However, currently unimplementable due to the complex regular expression(s) required and an error with certain SHACL-SPARQL implementations, as reported on <a href="https://discord.com/channels/911006583067144212/911020976496586782/1204449907226845194">Discord</a>.</p>
 </div>
 </div>
 </div>
@@ -224,10 +224,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> NO</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Not the domain of SHACL.</p>
+<p>Not the domain of shape validation (ensuring existence of prefixes for namespaces).</p>
 </div>
 </div>
 </div>
@@ -252,10 +252,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> NO</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -283,7 +283,7 @@ The UML diagrams should depict how the developed model relates to external (reus
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -311,7 +311,7 @@ The UML diagrams should depict how the developed model relates to external (reus
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is informative; design principle.</p>
+<p>Informative rule on design principle.</p>
 </div>
 </div>
 </div>
@@ -339,7 +339,7 @@ The UML diagrams should depict how the developed model relates to external (reus
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Primarily specific to UML; not applicable in OWL and has not been observed in practice with SHACL. However, refer to <a href="https://datashapes.org/dash#abstract-classes">dash-abstract-classes</a> for further information.</p>
+<p>Rule is primarily specific to UML; not applicable in OWL and has not been observed in practice with SHACL. However, the extended SHACL vocabulary <a href="https://datashapes.org/dash#abstract-classes">dash-abstract-classes</a> may be investigated in the future for potential applicability at the UML-OWL layer, which may then be translateable as shape validation rules.</p>
 </div>
 </div>
 </div>
@@ -368,7 +368,7 @@ its datatype and multiplicity whenever possible [<a href="https://semiceu.github
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Primarily specific to UML; the conventions disallow the use of domain and range, making this inapplicable. Additionally, value ranges are not consistently specified in SHACL. Nevertheless, there might be the possibility to enforce that literal properties do not have object values and vice versa.</p>
+<p>Mostly UML-specific; domain and range are not allowed in the conventions so this would not be applicable. Value ranges are also not always specified in SHACL. That literal properties don&#8217;t have object values, and vice versa, is the subject of a syntax checker.</p>
 </div>
 </div>
 </div>
@@ -396,7 +396,7 @@ its datatype and multiplicity whenever possible [<a href="https://semiceu.github
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Primarily specific to UML; validating the presence of maxCount is challenging because if UML specifies the value as '*' or 'n,' there is no restriction to be generated. Similarly, minCount is not consistently generated when minimum=0 is specified.</p>
+<p>Mostly UML-specific; presence of <code>maxCount</code> cannot be validated because, if in UML the value <code>*</code> or <code>n</code> is specified, there is no restriction to be generated. Additionally, <code>minCount</code> is not consistently generated for <code>minimum=0</code>.</p>
 </div>
 </div>
 </div>
@@ -424,7 +424,7 @@ its datatype and multiplicity whenever possible [<a href="https://semiceu.github
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -452,7 +452,7 @@ its datatype and multiplicity whenever possible [<a href="https://semiceu.github
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -480,7 +480,7 @@ its datatype and multiplicity whenever possible [<a href="https://semiceu.github
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -508,7 +508,7 @@ its datatype and multiplicity whenever possible [<a href="https://semiceu.github
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -536,7 +536,7 @@ its datatype and multiplicity whenever possible [<a href="https://semiceu.github
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -564,7 +564,7 @@ its datatype and multiplicity whenever possible [<a href="https://semiceu.github
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is UML-specific.</p>
+<p>Rule is UML-specific.</p>
 </div>
 </div>
 </div>
@@ -593,7 +593,7 @@ The creation of custom datatypes shall be avoided.</p></td>
 <p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Anything declared within standard namespaces (RDF(S)/XSD) is acceptable because no new (custom) definitions are introduced. This raises the question of new datatypes defined within these standard namespaces.</p>
+<p>Anything declared within standard namespaces (RDF(S)/XSD) is acceptable because no new (custom) definitions are introduced. This, however, raises the question of new datatypes defined within these standard namespaces, which is not easy to check.</p>
 </div>
 </div>
 </div>
