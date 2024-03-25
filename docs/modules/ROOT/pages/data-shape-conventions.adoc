@@ -8,32 +8,33 @@
 |{set:cellbgcolor: #f5f8fc}
 
 *Identifier*  https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r1[DSC-R1]
-.
+
 |*Statement:*
 
 The data shapes shall be expressed in SHACL.
 |===
 
-**Checkable:** Yes
+*Checkable:* Yes, partially
 
-**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl[shape_declarations_exist.shacl.ttl]
+Validating that a Shapes file is indeed a SHACL Shapes file may perhaps be the subject of a syntax checker or https://www.itb.ec.europa.eu/shacl/shacl/upload[another validation profile]. It raises the question of whether to accommodate shape declarations and class definitions in the same file/graph, and also declaration styles where a class is also a shape (class extended shapes, which is in turn a subject of https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r4[DSC-R4]). Furthermore, a SHACL file is by extension also an OWL file. We can employ basic checks to ensure resource types are from either vocabulary, and that there exists at least one SHACL resource.
 
-**Shape Description:**
+=== Only SHACL and OWL resource types
+
+*Shapes File:*  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/shape_declarations_exist.shacl.ttl[shape_declarations_exist.shacl.ttl]
+
+*Shape Description(s):*
 
 * A node shape targeting all subjects of `rdf:type` with a property membership restriction to both the set of primary OWL and SHACL types
 
-* A node shape targeting the class `sh:NodeShape` with a restriction on the inverse of the propery `rdf:type` and minCount=1 (effectively saying there must be at least one instance of it)
+** *Non-Compliance Severity:* Violation
+** *Non-Compliance Message(s):*
+*** `Violation of SEMIC rule DSC-R1: Only SHACL (and OWL) class and property declarations shall be used`
 
+* A node shape targeting the class `sh:NodeShape` with a restriction on the inverse of the propery `rdf:type` and `minCount=1` (effectively saying there must be at least one instance of it)
 
-**Non-Compliance Message(s):**
-
-* Violation of SEMIC rule DSC-R1: Only SHACL (and OWL) class and property declarations shall be used
-
-* Violation of SEMIC rule DSC-R1: SHACL shape declarations shall exist
-
-**Non-Compliance Severity:** Violation
-
-**Desired State:** Only SHACL resources (instances declared to be one of the SHACL types and additionally also OWL) exist.
+** *Non-Compliance Severity:* Violation
+** *Non-Compliance Message(s):*
+*** `Violation of SEMIC rule DSC-R1: SHACL shape declarations shall exist`
 
 [[sec:dsc-r2]]
 == Loose versus rigid constraints
@@ -50,9 +51,9 @@ The data shapes shall be expressed in SHACL.
 In a Core Vocabulary, then the data shape constraints shall be as loose as possible, i.e., permissive, while in an Application Profile, the data shape constraints shall be as rigid as necessary, i.e. restrictive.
 |===
 
-**Checkable:** No.
+*Checkable:* No
 
-**Why:** It is not possible to verify whether a vocabulary is a component of an application profile. To implement such a check, options need to be provided, such as specifying an application profile for validation. Nevertheless, identifying violations in shapes that adhere or deviate from the application profile will pose a challenge.
+It is not possible to verify whether a vocabulary is a component of an Application Profile (AP). To implement such a check, options need to be provided, such as specifying an AP for validation. Nevertheless, identifying violations in shapes that adhere to or deviate from the AP will pose a challenge.
 
 [[sec:dsc-r3]]
 == Open and Closed world assumptions
@@ -69,9 +70,10 @@ In a Core Vocabulary, then the data shape constraints shall be as loose as possi
 The data instantiating a core model may be fragmented across information systems. For representation purposes, open-world
 assumptions shall be adopted, and for validation purposes, a closed-world assumption shall be adopted.
 |===
-**Checkable:** No.
 
-**Why:** The open vs. closed world assumption is not easily verified in an automated manner. The conventions do not clearly articulate how this affects large ontologies, such as ePO.
+*Checkable:* No
+
+The open vs. closed world assumption is not easily verified in an automated manner. The conventions do not clearly articulate how this affects large ontologies, such as ePO.
 
 [[sec:dsc-r4]]
 == Shape definitions
@@ -88,22 +90,21 @@ assumptions shall be adopted, and for validation purposes, a closed-world assump
 Each ontology class shall be mirrored by a `sh:NodeShape`. The property constraints may be embedded (contextualised) within node shapes or defined as freestanding.
 |===
 
-**Checkable:** Yes
+**Checkable:** Yes, partially
 
-**Shape File** : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl[avoid_class_extension.shacl.ttl]
+The gist of the rule is two-fold: (i) every class must have a corresponding shape and (ii) property constraints can be "freestanding" or not. SEMIC does not make clear if the latter is to be recommended or avoided. The former would normally not be implementable, as _we validate SHACL and OWL independently_, but an idea for the future is to allow (provide an option for) a combined validation of both OWL and SHACL. There are other subrules, and one clearly implementable is that of avoiding class extended shapes (i.e. a shape that is also a class).
 
-**Shape Description:**
+=== Avoid shapes that are extended from classes
 
-A node shape targeting the class `sh:NodeShape` with a property value type membership restriction to `sh:NodeShape` (effectively saying this is by no means an extended shape of any kind - not just OWL class)
+*Shapes File:* : https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl[avoid_class_extension.shacl.ttl]
 
-**Non-Compliance Message(s):**
+*Shape Description(s):*
 
-* Non-observance of SEMIC rule DSC-R4: Avoid classes extended as node shapes.
+* A node shape targeting the class `sh:NodeShape` with a property value type membership restriction to `sh:NodeShape` (effectively saying this is by no means an extended shape of any kind - not just OWL class)
 
-**Non-Compliance Severity:** Warning
-
-**Desired State:** A NodeShape is not declared to be of any other type.
-
+** *Non-Compliance Severity:* Warning
+** *Non-Compliance Message(s):*
+*** Non-observance of SEMIC rule DSC-R4: Avoid classes extended as node shapes.
 
 [[sec:dsc-r5]]
 == Data shape severity
@@ -122,16 +123,16 @@ It is recommended to use constraint severity for distinguishing critical violati
 
 *Checkable:* Yes
 
-**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/severity_declaration_exists.shacl.ttl[severity_declaration_exists.shacl.ttl]
+This is a rule which has syntax implications and therefore may be covered more extensively by a https://www.itb.ec.europa.eu/shacl/shacl/upload[validator using a syntax profile].
 
-*Shape Description:*
+=== Explicit declaration of severity
 
-A node shape is targeting at the class sh:NodeShape and includes a restriction of XONE (exactly or 'exclusively one of') on two sets of property shapes. The first set relates to the property sh:severity with an exact cardinality of 1. The second set relates to the sequence of properties (sh:property sh:severity) with an exact cardinality of 1, referring to any associated property shape. Essentially, this specification implies that either of these situations must exist.
+*Shapes File:* https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/severity_declaration_exists.shacl.ttl[severity_declaration_exists.shacl.ttl]
 
-**Non-Compliance Message(s):**
+*Shape Description(s):*
 
-* Non-observation of SEMIC rule DSC-R5: Data shapes should be assigned a level of severity.
+* A node shape targeting the class `sh:NodeShape` with a restriction of XONE (exactly or "exclusively one of") on two sets of property shapes: one on the property `sh:severity` with exact cardinality 1, and another on the sequence of properties `(sh:property sh:severity)` with exact cardinality 1, referring to any related property shape (effectively saying check that either one of these situations must exist).
 
-**Non-Compliance Severity:** Warning
-
-**Desired State:** A NodeShape is not declared to be of any other type.
+** *Non-Compliance Severity:* Warning
+** *Non-Compliance Message(s):*
+*** `Non-observation of SEMIC rule DSC-R5: Data shapes should be assigned a level of severity`
