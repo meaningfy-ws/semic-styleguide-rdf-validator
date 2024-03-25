@@ -83,7 +83,7 @@
     <li><a href="data-shape-conventions.html">Data Shape Conventions</a></li>
   </ul>
 </nav>
-<div class="edit-this-page"><a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/edit/main/docs/modules/ROOT/pages/data-shape-conventions.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/edit/feature/SM15-116/docs/docs/modules/ROOT/pages/data-shape-conventions.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -104,8 +104,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock">
-<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r1">DSC-R1</a>
-.</p></td>
+<strong>Identifier</strong>  <a href="https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r1">DSC-R1</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color:  #f5f8fc;"><p class="tableblock"><strong>Statement:</strong></p>
@@ -114,42 +113,63 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> Yes</p>
+<p><strong>Checkable:</strong> Yes, partially</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl">shape_declarations_exist.shacl.ttl</a></p>
+<p>Validating that a Shapes file is indeed a SHACL Shapes file may perhaps be the subject of a syntax checker or <a href="https://www.itb.ec.europa.eu/shacl/shacl/upload">another validation profile</a>. It raises the question of whether to accommodate shape declarations and class definitions in the same file/graph, and also declaration styles where a class is also a shape (class extended shapes, which is in turn a subject of <a href="https://semiceu.github.io/style-guide/1.0.0/gc-data-shape-conventions.html#sec:dsc-r4">DSC-R4</a>). Furthermore, a SHACL file is by extension also an OWL file. We can employ basic checks to ensure resource types are from either vocabulary, and that there exists at least one SHACL resource.</p>
+</div>
+<div class="sect2">
+<h3 id="_only_shacl_and_owl_resource_types"><a class="anchor" href="#_only_shacl_and_owl_resource_types"></a>Only SHACL and OWL resource types</h3>
+<div class="paragraph">
+<p><strong>Shapes File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/shape_declarations_exist.shacl.ttl">shape_declarations_exist.shacl.ttl</a></p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description:</strong></p>
+<p><strong>Shape Description(s):</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>A node shape targeting all subjects of <code>rdf:type</code> with a property membership restriction to both the set of primary OWL and SHACL types</p>
-</li>
-<li>
-<p>A node shape targeting the class <code>sh:NodeShape</code> with a restriction on the inverse of the propery <code>rdf:type</code> and minCount=1 (effectively saying there must be at least one instance of it)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Non-Compliance Message(s):</strong></p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Violation of SEMIC rule DSC-R1: Only SHACL (and OWL) class and property declarations shall be used</p>
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
 </li>
 <li>
-<p>Violation of SEMIC rule DSC-R1: SHACL shape declarations shall exist</p>
+<p><strong>Non-Compliance Message(s):</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Violation of SEMIC rule DSC-R1: Only SHACL (and OWL) class and property declarations shall be used</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p><strong>Desired State:</strong> Only SHACL resources (instances declared to be one of the SHACL types and additionally also OWL) exist.</p>
+</li>
+<li>
+<p>A node shape targeting the class <code>sh:NodeShape</code> with a restriction on the inverse of the propery <code>rdf:type</code> and <code>minCount=1</code> (effectively saying there must be at least one instance of it)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</li>
+<li>
+<p><strong>Non-Compliance Message(s):</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Violation of SEMIC rule DSC-R1: SHACL shape declarations shall exist</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -174,10 +194,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> No.</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> It is not possible to verify whether a vocabulary is a component of an application profile. To implement such a check, options need to be provided, such as specifying an application profile for validation. Nevertheless, identifying violations in shapes that adhere or deviate from the application profile will pose a challenge.</p>
+<p>It is not possible to verify whether a vocabulary is a component of an Application Profile (AP). To implement such a check, options need to be provided, such as specifying an AP for validation. Nevertheless, identifying violations in shapes that adhere to or deviate from the AP will pose a challenge.</p>
 </div>
 </div>
 </div>
@@ -203,10 +223,10 @@ assumptions shall be adopted, and for validation purposes, a closed-world assump
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> No.</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> The open vs. closed world assumption is not easily verified in an automated manner. The conventions do not clearly articulate how this affects large ontologies, such as ePO.</p>
+<p>The open vs. closed world assumption is not easily verified in an automated manner. The conventions do not clearly articulate how this affects large ontologies, such as ePO.</p>
 </div>
 </div>
 </div>
@@ -231,20 +251,30 @@ assumptions shall be adopted, and for validation purposes, a closed-world assump
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> Yes</p>
+<p><strong>Checkable:</strong> Yes, partially</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape File</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl">avoid_class_extension.shacl.ttl</a></p>
+<p>The gist of the rule is two-fold: (i) every class must have a corresponding shape and (ii) property constraints can be "freestanding" or not. SEMIC does not make clear if the latter is to be recommended or avoided. The former would normally not be implementable, as <em>we validate SHACL and OWL independently</em>, but an idea for the future is to allow (provide an option for) a combined validation of both OWL and SHACL. There are other subrules, and one clearly implementable is that of avoiding class extended shapes (i.e. a shape that is also a class).</p>
+</div>
+<div class="sect2">
+<h3 id="_avoid_shapes_that_are_extended_from_classes"><a class="anchor" href="#_avoid_shapes_that_are_extended_from_classes"></a>Avoid shapes that are extended from classes</h3>
+<div class="paragraph">
+<p><strong>Shapes File:</strong> : <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/avoid_class_extension.shacl.ttl">avoid_class_extension.shacl.ttl</a></p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description:</strong></p>
+<p><strong>Shape Description(s):</strong></p>
 </div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
 <p>A node shape targeting the class <code>sh:NodeShape</code> with a property value type membership restriction to <code>sh:NodeShape</code> (effectively saying this is by no means an extended shape of any kind - not just OWL class)</p>
-</div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</li>
+<li>
 <p><strong>Non-Compliance Message(s):</strong></p>
-</div>
 <div class="ulist">
 <ul>
 <li>
@@ -252,11 +282,12 @@ assumptions shall be adopted, and for validation purposes, a closed-world assump
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p><strong>Desired State:</strong> A NodeShape is not declared to be of any other type.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -284,29 +315,40 @@ assumptions shall be adopted, and for validation purposes, a closed-world assump
 <p><strong>Checkable:</strong> Yes</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/severity_declaration_exists.shacl.ttl">severity_declaration_exists.shacl.ttl</a></p>
+<p>This is a rule which has syntax implications and therefore may be covered more extensively by a <a href="https://www.itb.ec.europa.eu/shacl/shacl/upload">validator using a syntax profile</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_explicit_declaration_of_severity"><a class="anchor" href="#_explicit_declaration_of_severity"></a>Explicit declaration of severity</h3>
+<div class="paragraph">
+<p><strong>Shapes File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/shacl/severity_declaration_exists.shacl.ttl">severity_declaration_exists.shacl.ttl</a></p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description:</strong></p>
-</div>
-<div class="paragraph">
-<p>A node shape is targeting at the class sh:NodeShape and includes a restriction of XONE (exactly or 'exclusively one of') on two sets of property shapes. The first set relates to the property sh:severity with an exact cardinality of 1. The second set relates to the sequence of properties (sh:property sh:severity) with an exact cardinality of 1, referring to any associated property shape. Essentially, this specification implies that either of these situations must exist.</p>
-</div>
-<div class="paragraph">
-<p><strong>Non-Compliance Message(s):</strong></p>
+<p><strong>Shape Description(s):</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Non-observation of SEMIC rule DSC-R5: Data shapes should be assigned a level of severity.</p>
+<p>A node shape targeting the class <code>sh:NodeShape</code> with a restriction of XONE (exactly or "exclusively one of") on two sets of property shapes: one on the property <code>sh:severity</code> with exact cardinality 1, and another on the sequence of properties <code>(sh:property sh:severity)</code> with exact cardinality 1, referring to any related property shape (effectively saying check that either one of these situations must exist).</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</li>
+<li>
+<p><strong>Non-Compliance Message(s):</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Non-observation of SEMIC rule DSC-R5: Data shapes should be assigned a level of severity</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>Non-Compliance Severity:</strong> Warning</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p><strong>Desired State:</strong> A NodeShape is not declared to be of any other type.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
