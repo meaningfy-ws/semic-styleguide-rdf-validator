@@ -112,10 +112,10 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> No.</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Not the domain of SHACL. While some parts of this rule may be implementable with some effort (like checking for dereferenceable IRIs, existing license), this is overall not actionable as SHACL shapes.</p>
+<p>Not the domain of shape validation. While some parts of this rule may be implementable with some effort (like checking for dereferenceable IRIs, existing license), this is overall not actionable as SHACL Shapes.</p>
 </div>
 </div>
 </div>
@@ -144,10 +144,10 @@ artefacts) and human-readable (HTML artefact).</p></td>
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> No.</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Not the domain of SHACL.</p>
+<p>Not the domain of shape validation.</p>
 </div>
 </div>
 </div>
@@ -173,32 +173,43 @@ principles.</p></td>
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> Yes</p>
+<p><strong>Checkable:</strong> Yes, partially</p>
 </div>
 <div class="paragraph">
-<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/semantic_versioning.shacl.ttl">semantic_versioning.shacl.ttl</a></p>
+<p>This rule sets forth a recommendation for methodology, but also prescribes the version number format according to <a href="https://semver.org/">SemVer</a>, which is a check we can implement through regular-expression text matching.</p>
+</div>
+<div class="sect2">
+<h3 id="_versioning_information_compatible_with_semver_exists"><a class="anchor" href="#_versioning_information_compatible_with_semver_exists"></a>Versioning information compatible with SemVer exists</h3>
+<div class="paragraph">
+<p><strong>Shapes File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/semantic_versioning.shacl.ttl">semantic_versioning.shacl.ttl</a></p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description:</strong></p>
-</div>
-<div class="paragraph">
-<p>A node shape targeting the class <code>owl:Class</code> with a property restriction on <code>owl:versionInfo</code> of exact cardinality 1, datatype string, and a value pattern matching verbatim the second of the official regular expression.</p>
-</div>
-<div class="paragraph">
-<p><strong>Non-Compliance Message(s):</strong></p>
+<p><strong>Shape Description(s):</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Violation of SEMIC rule PC-R3: The ontology shall be versioned following the SemVer specification.</p>
+<p>A node shape targeting the class <code>owl:Class</code> with a property restriction on <code>owl:versionInfo</code> of exact cardinality 1, datatype string, and a value pattern matching verbatim the second of the <a href="https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string">official SemVer regular expressions</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</li>
+<li>
+<p><strong>Non-Compliance Message(s):</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Violation of SEMIC rule PC-R3: The ontology shall be versioned following the SemVer specification</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p><strong>Desired State:</strong> Versioning information exists on any owl:Ontology instance matching a specific pattern compatible with SemVer.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -226,28 +237,38 @@ or constraints).</p></td>
 <div class="paragraph">
 <p><strong>Checkable:</strong> Yes</p>
 </div>
+<div class="sect2">
+<h3 id="_no_versioning_on_resources_other_than_the_ontology"><a class="anchor" href="#_no_versioning_on_resources_other_than_the_ontology"></a>No versioning on resources other than the ontology</h3>
 <div class="paragraph">
-<p><strong>Shape File:</strong>  <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_atomic_versioning.shacl.ttl">no_atomic_versioning.shacl.ttl</a></p>
+<p><strong>Shapes File:</strong> <a href="https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_atomic_versioning.shacl.ttl">no_atomic_versioning.shacl.ttl</a></p>
 </div>
 <div class="paragraph">
-<p><strong>Shape Description:</strong></p>
-</div>
-<div class="paragraph">
-<p>Node shapes targeting classes of {owl:Class, owl:ObjectProperty, owl:DatatypeProperty} with restrictions of maxCount=0 on <code>owl:versionInfo</code> and <code>owl:versionIRI</code>.
-<strong>Non-Compliance Message(s):</strong></p>
+<p><strong>Shape Description(s):</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Violation of SEMIC rule PC-R4: Never version on atomic elements</p>
+<p>Node shapes targeting classes of {owl:Class, owl:ObjectProperty, owl:DatatypeProperty} with restrictions of <code>maxCount=0</code> on <code>owl:versionInfo</code> and <code>owl:versionIRI</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</li>
+<li>
+<p><strong>Non-Compliance Message(s):</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Violation of SEMIC rule PC-R4: Never version on atomic elements</code></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><strong>Non-Compliance Severity:</strong> Violation</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p><strong>Desired State:</strong> No owl versioning properties exist on any instance of {Class, DatatypeProperty, ObjectProperty}.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -272,10 +293,10 @@ or constraints).</p></td>
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> No.</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Not the domain of SHACL.</p>
+<p>Not the domain of shape validation.</p>
 </div>
 </div>
 </div>
@@ -300,10 +321,10 @@ or constraints).</p></td>
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Checkable:</strong> No.</p>
+<p><strong>Checkable:</strong> No</p>
 </div>
 <div class="paragraph">
-<p><strong>Why:</strong> Not the domain of SHACL.</p>
+<p>Not the domain of shape validation.</p>
 </div>
 </div>
 </div>
