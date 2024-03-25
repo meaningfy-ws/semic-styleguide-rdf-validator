@@ -15,9 +15,9 @@
 Publishing data specifications shall be compliant with 5-star LOD criteria.
 |===
 
-**Checkable:** No.
+*Checkable:* No
 
-**Why:** Not the domain of SHACL. While some parts of this rule may be implementable with some effort (like checking for dereferenceable IRIs, existing license), this is overall not actionable as SHACL shapes.
+Not the domain of shape validation. While some parts of this rule may be implementable with some effort (like checking for dereferenceable IRIs, existing license), this is overall not actionable as SHACL Shapes.
 
 [[sec:pc-r2]]
 == Persistent URI policy
@@ -40,10 +40,9 @@ SEMIC adheres to the EU persistent URI policy. Each SEMIC URI is dereferenceable
 artefacts) and human-readable (HTML artefact).
 |===
 
-**Checkable:** No.
+*Checkable:* No
 
-**Why:** Not the domain of SHACL.
-
+Not the domain of shape validation.
 
 [[sec:pc-r3]]
 == Version management
@@ -61,21 +60,21 @@ A consistent version management shall be implemented for the data specification 
 principles.
 |===
 
-**Checkable:** Yes
+*Checkable:* Yes, partially
 
-**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/semantic_versioning.shacl.ttl[semantic_versioning.shacl.ttl]
+This rule sets forth a recommendation for methodology, but also prescribes the version number format according to https://semver.org/[SemVer], which is a check we can implement through regular-expression text matching.
 
-**Shape Description:**
+=== Versioning information compatible with SemVer exists
 
-A node shape targeting the class `owl:Class` with a property restriction on `owl:versionInfo` of exact cardinality 1, datatype string, and a value pattern matching verbatim the second of the official regular expression.
+*Shapes File:* https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/semantic_versioning.shacl.ttl[semantic_versioning.shacl.ttl]
 
-**Non-Compliance Message(s):**
+*Shape Description(s):*
 
-* Violation of SEMIC rule PC-R3: The ontology shall be versioned following the SemVer specification.
+* A node shape targeting the class `owl:Class` with a property restriction on `owl:versionInfo` of exact cardinality 1, datatype string, and a value pattern matching verbatim the second of the https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string[official SemVer regular expressions].
 
-**Non-Compliance Severity:** Violation
-
-**Desired State:** Versioning information exists on any owl:Ontology instance matching a specific pattern compatible with SemVer.
+** *Non-Compliance Severity:* Violation
+** *Non-Compliance Message(s):*
+*** `Violation of SEMIC rule PC-R3: The ontology shall be versioned following the SemVer specification`
 
 [[sec:pc-r4]]
 == Artefact versioning
@@ -93,20 +92,19 @@ The data specification shall be versioned as a whole and never to atomic element
 or constraints).
 |===
 
-**Checkable:** Yes
+*Checkable:* Yes
 
-**Shape File:**  https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_atomic_versioning.shacl.ttl[no_atomic_versioning.shacl.ttl]
+=== No versioning on resources other than the ontology
 
-**Shape Description:**
+*Shapes File:* https://github.com/meaningfy-ws/semic-styleguide-rdf-validator/blob/main/shapes/owl/no_atomic_versioning.shacl.ttl[no_atomic_versioning.shacl.ttl]
 
-Node shapes targeting classes of {owl:Class, owl:ObjectProperty, owl:DatatypeProperty} with restrictions of maxCount=0 on `owl:versionInfo` and `owl:versionIRI`.
-**Non-Compliance Message(s):**
+*Shape Description(s):*
 
-* Violation of SEMIC rule PC-R4: Never version on atomic elements
+* Node shapes targeting classes of {owl:Class, owl:ObjectProperty, owl:DatatypeProperty} with restrictions of `maxCount=0` on `owl:versionInfo` and `owl:versionIRI`.
 
-**Non-Compliance Severity:** Violation
-
-**Desired State:** No owl versioning properties exist on any instance of {Class, DatatypeProperty, ObjectProperty}.
+** *Non-Compliance Severity:* Violation
+** *Non-Compliance Message(s):*
+*** `Violation of SEMIC rule PC-R4: Never version on atomic elements`
 
 [[sec:pc-r5]]
 == URI dereferencing
@@ -122,10 +120,10 @@ Node shapes targeting classes of {owl:Class, owl:ObjectProperty, owl:DatatypePro
 
 Any URI identifiable resource devised in a data specification shall be dereferenceable.
 |===
-**Checkable:** No.
 
-**Why:** Not the domain of SHACL.
+*Checkable:* No
 
+Not the domain of shape validation.
 
 [[sec:pc-r6]]
 == Human-readable form
@@ -142,6 +140,6 @@ Any URI identifiable resource devised in a data specification shall be dereferen
 Each data specification shall have a corresponding human-readable form representing the model documentation.
 |===
 
-**Checkable:** No.
+*Checkable:* No
 
-**Why:** Not the domain of SHACL.
+Not the domain of shape validation.
