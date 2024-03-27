@@ -34,7 +34,7 @@ Documentation on using the Interoperability Test Bed (ITB) is available
 [here](https://www.itb.ec.europa.eu/docs/guides/latest/validatingRDF/index.html#step-6-use-the-validator).
 
 ### Useful Links
-* The UI is available at https://www.itb.ec.europa.eu/shacl/semicstyleguide/upload
+* The official UI is available at https://www.itb.ec.europa.eu/shacl/semicstyleguide/upload
 * The SOAP API is available at https://www.itb.ec.europa.eu/shacl/soap/semicstyleguide/validation?wsdl
 * The REST API (Swagger UI) is available at https://www.itb.ec.europa.eu/shacl/swagger-ui/index.html
 
