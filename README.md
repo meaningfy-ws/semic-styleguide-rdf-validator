@@ -21,7 +21,7 @@ applicable SEMIC rules.
 ## ITB SEMIC SHACL Validator
 
 This service allows you to assess the conformance of an **OWL model**
-(ontology) or a **SHaCL Shapes** file with the [SEMIC Style
+(ontology) or a **SHACL Shapes** file with the [SEMIC Style
 Guide](https://semiceu.github.io/style-guide/1.0.0/gc-conceptual-model-conventions.html).
 For each guideline in the style guide, a set of rules have been implemented,
 which assess whether an OWL or SHACL convention is respected. These rules
@@ -33,7 +33,7 @@ The content to validate can be provided as a **file** or a **URI reference**.
 Documentation on using the Interoperability Test Bed (ITB) is available
 [here](https://www.itb.ec.europa.eu/docs/guides/latest/validatingRDF/index.html#step-6-use-the-validator).
 
-## SEMIC Conformance Test Suite for OWL and ShaCL
+## SEMIC Conformance Test Suite for OWL and SHACL
 
 Aside from the `examples/` folder, which is provided for user convenience, only
 the `resources/` folder is
@@ -93,14 +93,14 @@ Run the test suite from the toplevel/root of the project folder:
 pytest # or make test
 ```
 
-For generating the complete ShaCL shapes file aggregated from the
+For generating the complete SHACL shapes file aggregated from the
 individual test shapes, a convenience Make target is provided:
 
 ```bash
 make generate_aggregate_shapes
 ```
 
-This generates the ShACL shapes file in `output/semic-shacl.ttl` (a version of
+This generates the SHACL shapes file in `output/semic-shacl.ttl` (a version of
 which is committed in `resources/shapes`).
 
 Alternatively, if you do not have `make`, inspect the Makefile and run the
