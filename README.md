@@ -1,4 +1,4 @@
-# SEMIC Style Guide RDF Validator
+# SEMIC Style Guide RDF Validator 
 
 This project comprises a Python test suite and configuration resources for a
 Java service, for validating [OWL](https://www.w3.org/TR/owl2-overview/)
